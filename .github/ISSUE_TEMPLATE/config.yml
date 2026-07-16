@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Ask a question
+    url: https://github.com/hazyio/Commit/discussions
+    about: Questions about using Commit should go here, not as an issue
+  - name: WakaTime API / account issues
+    url: https://wakatime.com/contact
+    about: Issues with your WakaTime account, API key, or coding stats should be reported to WakaTime directly, not here
