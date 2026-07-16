@@ -16,13 +16,13 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-
         title: Text("Settings"),
+        actions: [IconButton(icon: Icon(Icons.home), onPressed: _goToHomePage)],
       ),
+
       body: Center(
         child: Column(
-          mainAxisAlignment: .center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text('You have pushed the button this many times: '),
             FilledButton(
