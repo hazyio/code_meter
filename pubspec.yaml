@@ -36,6 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   dynamic_color: ^1.7.0
   url_launcher: ^6.3.2
+  flutter_native_splash: ^2.4.8
 
 dev_dependencies:
   flutter_test:
@@ -58,6 +59,19 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
 flutter_launcher_icons:
   android: "launcher_icon"
   image_path: "assets/icon/icon.png"
+  # adaptive_icon_background: "#121414"
+  # adaptive_icon_foreground: "assets/icon/icon_foreground.png"
+
+flutter_native_splash:
+  color: "#FBF9F9"
+  color_dark: "#121414"
+  image: "assets/icon/icon_foreground.png"
+  android: true
+  android_12:
+    image: "assets/icon/icon_foreground.png"
+    icon_background_color: "#FBF9F9"
+    icon_background_color_dark: "#121414"

@@ -125,7 +125,6 @@ class _WelcomePageState extends State<WelcomePage> {
                           ),
                           TextButton(
                             style: TextButton.styleFrom(
-                              // padding: EdgeInsets.zero,
                               minimumSize: const Size(50, 30),
                               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                               alignment: Alignment.centerLeft,
@@ -172,19 +171,17 @@ class _WelcomePageState extends State<WelcomePage> {
                         ],
                       ),
 
-                      Expanded(
-                        child: Slider(
-                          value: _rewardPercentage.toDouble(),
-                          min: 0,
-                          max: 200,
-                          divisions: 200,
-                          // label: "$_rewardPercentage%",
-                          onChanged: (value) {
-                            setState(() {
-                              _rewardPercentage = value.toInt();
-                            });
-                          },
-                        ),
+                      Slider(
+                        value: _rewardPercentage.toDouble(),
+                        min: 0,
+                        max: 200,
+                        divisions: 200,
+                        // label: "$_rewardPercentage%",
+                        onChanged: (value) {
+                          setState(() {
+                            _rewardPercentage = value.toInt();
+                          });
+                        },
                       ),
                       Divider(
                         height: 20,
