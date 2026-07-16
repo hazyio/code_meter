@@ -1,17 +1,111 @@
-# code_meter
+# Code Meter
 
-A new Flutter project.
+Turn your coding time into screen time.
 
-## Getting Started
+**Code Meter** is an Android app that helps you manage daily device usage by rewarding screen time based
+on your coding activity from [WakaTime](https://wakatime.com). Code for 4 hours at a 50% reward
+rate, and you earn 2 hours of unlocked device usage. No coding, no screen time.
 
-This project is a starting point for a Flutter application.
+Built with **Flutter** for the UI and **native Kotlin** for on-device usage tracking and
+enforcement, designed to feel calm, minimal, and native — closer to Digital Wellbeing than a
+typical productivity app.
 
-A few resources to get you started if this is your first Flutter project:
+<!-- TODO Add screenshots here once available:
+<p align="center">
+  <img src="docs/screenshots/onboarding.png" width="250" />
+  <img src="docs/screenshots/dashboard.png" width="250" />
+  <img src="docs/screenshots/settings.png" width="250" />
+</p>
+-->
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+## How it works
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1. Connect your WakaTime account with a personal API key.
+2. Set a reward percentage — how many minutes of device time you earn per minute of coding.
+3. Code Meter tracks your coding activity for the day and unlocks device usage as you go.
+4. Optionally roll over unused screen time to the next day.
+
+```
+4h 32m coded today
+      × 50% reward rate
+      ────────────────
+   2h 16m device time earned
+```
+
+## Features
+
+- **WakaTime integration** — syncs your daily coding time via your personal API key
+- **Configurable reward rate** — 0–100%, set your own coding-to-screen-time ratio
+- **Time rollover** — optionally carry unused screen time into the next day
+- **Allowed apps list** — choose which apps stay usable while your allowance holds
+- **Dynamic Color** — adopts Material You theming on Android 12+, with a fixed fallback palette
+  otherwise
+- **Light and dark themes**
+- **No accounts, no tracking, no ads** — your WakaTime API key stays on-device
+
+## Screens
+
+- **Welcome / Setup** — connect your WakaTime API key, set your reward percentage, and choose
+  whether unused time rolls over
+- **Dashboard** — today's coding time, allowed device time, remaining balance, allowed apps, and a
+  manual sync button
+- **Settings** — manage your API key, reward rate, rollover preference, and app info
+
+## Tech stack
+
+- [Flutter](https://flutter.dev) / [Dart](https://dart.dev) — UI layer
+- [Material 3](https://m3.material.io/) — design system, via Flutter's `useMaterial3` theming
+- **Native Kotlin** — Android `UsageStatsManager` / `AccessibilityService` integration for usage
+  tracking and enforcement, bridged to Flutter via platform channels
+- [WakaTime API](https://wakatime.com/developers)
+
+Code Meter currently targets **Android only**. The usage-enforcement mechanic relies on Android-specific
+APIs (`UsageStatsManager`, `AccessibilityService`) that don't have an equivalent cross-platform
+abstraction, so there's no iOS build planned at this time.
+
+## Getting started
+
+### Prerequisites
+
+- [Flutter SDK](https://docs.flutter.dev/get-started/install) (stable channel)
+- Android Studio or VS Code with the Flutter/Dart extensions
+- A [WakaTime](https://wakatime.com) account and personal API
+  key ([find yours here](https://wakatime.com/settings/api-key))
+- A physical Android device or emulator running API 26+
+
+### Setup
+
+\`\`\`bash
+git clone https://github.com/hazyio/code_meter.git
+cd code_meter
+flutter pub get
+\`\`\`
+
+Because Code Meter includes native Kotlin code for usage tracking (via platform channels), running
+`flutter run` will trigger a native Android build the first time — this is expected and normal, not
+an error. No build-time secrets or `.env` files are required, since the WakaTime API key is entered
+by the user at runtime during onboarding, not baked into the build.
+
+\`\`\`bash
+flutter run
+\`\`\`
+
+## Contributing
+
+Contributions are welcome — see [CONTRIBUTING.md](CONTRIBUTING.md) for setup details, coding
+conventions, and how to submit a pull request.
+
+## Privacy
+
+Code Meter only communicates with the WakaTime API using the key you provide. No usage data, coding
+stats, or device information is sent anywhere else. Your API key is stored locally on your device.
+
+## License
+
+Code Meter is open source, licensed under the [MIT License](LICENSE) — free to use, modify, and
+distribute.
+
+## Acknowledgments
+
+- [WakaTime](https://wakatime.com) for the coding-activity API this app is built around. Code Meter is
+  an independent, unofficial client and is not affiliated with or endorsed by WakaTime.
