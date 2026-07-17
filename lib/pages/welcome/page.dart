@@ -36,6 +36,7 @@ class _WelcomePageState extends State<WelcomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(AppSpacing.marginTablet),
@@ -45,13 +46,13 @@ class _WelcomePageState extends State<WelcomePage> {
           children: [
             Text(
               'Earn Screen Time by Coding',
-              style: fromTextTheme(context).headlineMedium,
+              style: fromTextTheme(theme).headlineMedium,
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 30),
             Text(
               'Connect your WakaTime account and decide how coding hours convert into device usage.',
-              style: fromTextTheme(context).titleMedium,
+              style: fromTextTheme(theme).titleMedium,
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 20),
@@ -66,7 +67,7 @@ class _WelcomePageState extends State<WelcomePage> {
                     children: [
                       Text(
                         'Wakatime API Key',
-                        style: fromTextTheme(context).labelLarge,
+                        style: fromTextTheme(theme).labelLarge,
                       ),
                       SizedBox(height: 8),
                       TextFormField(
@@ -116,11 +117,9 @@ class _WelcomePageState extends State<WelcomePage> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Text(
-                            "Found in your WakaTime",
-                            style: fromTextTheme(context).bodySmall?.copyWith(
-                              color: Theme.of(
-                                context,
-                              ).colorScheme.surfaceBright,
+                            "Can be found in your WakaTime",
+                            style: fromTextTheme(theme).labelSmall?.copyWith(
+                              color: fromColorScheme(theme).onSurfaceVariant,
                             ),
                           ),
                           TextButton(
@@ -134,10 +133,8 @@ class _WelcomePageState extends State<WelcomePage> {
                             },
                             child: Text(
                               'API page.',
-                              style: fromTextTheme(context).bodySmall?.copyWith(
-                                color: Theme.of(
-                                  context,
-                                ).colorScheme.surfaceTint,
+                              style: fromTextTheme(theme).labelSmall?.copyWith(
+                                color: fromColorScheme(theme).surfaceTint,
                               ),
                             ),
                           ),
@@ -149,44 +146,63 @@ class _WelcomePageState extends State<WelcomePage> {
                           Expanded(
                             child: Text(
                               "Reward Percentage",
-                              style: fromTextTheme(context).labelLarge,
+                              style: fromTextTheme(theme).labelLarge,
                             ),
                           ),
 
-                          Badge(
-                            label: Text(
-                              "Beta",
-                              style: fromTextTheme(context).labelSmall
-                                  ?.copyWith(
-                                    color: Theme.of(
-                                      context,
-                                    ).colorScheme.onPrimary,
-                                  ),
-                            ),
-                          ),
                           Text(
                             "$_rewardPercentage%",
-                            style: fromTextTheme(context).labelSmall,
+                            style: fromTextTheme(theme).labelSmall,
                           ),
                         ],
                       ),
-
+                      const SizedBox(height: 10),
                       Slider(
                         value: _rewardPercentage.toDouble(),
                         min: 0,
                         max: 200,
                         divisions: 200,
-                        // label: "$_rewardPercentage%",
                         onChanged: (value) {
                           setState(() {
                             _rewardPercentage = value.toInt();
                           });
                         },
                       ),
+                      const SizedBox(height: 15),
+                      Container(
+                        padding: const EdgeInsets.all(AppSpacing.gutter),
+                        decoration: BoxDecoration(
+                          color: fromColorScheme(theme).secondaryContainer,
+                          borderRadius: BorderRadius.circular(AppRadius.medium),
+                        ),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.info_outline,
+                              color: fromColorScheme(
+                                theme,
+                              ).onSecondaryContainer,
+                              size: 15,
+                            ),
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: Text(
+                                '1 coding hour gives ${percentToTimeString(_rewardPercentage, 3600)} of device time ',
+                                style: fromTextTheme(theme).bodySmall?.copyWith(
+                                  color: fromColorScheme(
+                                    theme,
+                                  ).onSecondaryContainer,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                       Divider(
                         height: 20,
-                        color: Theme.of(context).colorScheme.surfaceBright,
+                        color: fromColorScheme(theme).surfaceBright,
                       ),
+                      const SizedBox(height: 30),
                       Switch(
                         value: _rollover,
                         onChanged: (bool value) {
@@ -224,7 +240,7 @@ class _WelcomePageState extends State<WelcomePage> {
               },
               child: Text(
                 'Open Source On Github',
-                style: fromTextTheme(context).bodySmall?.copyWith(
+                style: fromTextTheme(theme).bodySmall?.copyWith(
                   color: Theme.of(context).colorScheme.primary,
                 ),
               ),

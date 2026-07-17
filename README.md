@@ -109,3 +109,4 @@ distribute.
 
 - [WakaTime](https://wakatime.com) for the coding-activity API this app is built around. Code Meter is
   an independent, unofficial client and is not affiliated with or endorsed by WakaTime.
+- [Icon Kitchen](https://icon.kitchen/) for the app icon and splash screen assets, without which this app icon would be off and the splash screen would be a blank white screen.
