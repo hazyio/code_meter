@@ -1,3 +1,8 @@
+import 'package:code_meter/gen/i18n/strings.g.dart';
+import 'package:code_meter/pages/home/apps.dart';
+import 'package:code_meter/pages/home/history.dart';
+import 'package:code_meter/pages/home/home.dart';
+import 'package:code_meter/theme/app_dimens.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -8,31 +13,48 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  void _goToSettingsPage() {
-    Navigator.pushNamed(context, '/settings');
-  }
+  int currentPageIndex = 0;
+  
 
   @override
   Widget build(BuildContext context) {
+    final translation = t;
+   
+
     return Scaffold(
-      // appBar: AppBar(
-      //   backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+      bottomNavigationBar: NavigationBar(
+        height: 60.0,
 
-      //   title: Text(widget.title),
-      // ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: .center,
-          children: [
-            const Text('Home Page'),
-
-            FilledButton(
-              onPressed: _goToSettingsPage,
-              child: const Text('Go to Settings'),
-            ),
-          ],
-        ),
+        labelBehavior: .onlyShowSelected,
+        onDestinationSelected: (int index) {
+          setState(() {
+            currentPageIndex = index;
+          });
+        },
+        selectedIndex: currentPageIndex,
+        destinations: <Widget>[
+          NavigationDestination(
+            selectedIcon: Icon(Icons.dashboard),
+            icon: Icon(Icons.dashboard_outlined),
+            label: translation.dashboard,
+          ),
+          NavigationDestination(
+            selectedIcon: Icon(Icons.apps_sharp),
+            icon: Icon(Icons.apps_outlined),
+            label: translation.apps,
+          ),
+          NavigationDestination(
+            selectedIcon: Icon(Icons.history_rounded),
+            icon: Icon(Icons.history_outlined),
+            label: translation.history,
+          ),
+        ],
       ),
+      body: <Widget>[
+        HomeSubPage(),
+        AppsSubPage(),
+        HistorySubPage(),
+      ][currentPageIndex],
     );
   }
 }

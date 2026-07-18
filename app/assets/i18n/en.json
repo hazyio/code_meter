@@ -1,0 +1,45 @@
+{
+  "welcomeTitle": "Earn Screen Time by Coding",
+  "welcomeDescription": "Connect your WakaTime account and decide how coding hours convert into device usage.",
+  "save": "Save",
+  "rewardPercentage": "Reward Percentage",
+  "allowRollover": "Allow Time Rollover",
+  "allowRolloverDescription": "Unused earned time carries over to the next day.",
+  "wakaApiKey": "Wakatime API Key",
+  "unExpectedError": "An  unexpected error occurred, try again later.",
+  "codingTime": "1 coding hour = $convert of device time.",
+  "openSourceOnGithub": "Open Source On Github",
+  "ok": "Ok",
+  "tryAgain": "Try Again",
+  "openWakaTimeApiPage": "Open WakaTime API page",
+  "settingsLanguage": "Language",
+  "history": "History",
+  "apps": "Apps",
+  "dashboard": "Dashboard",
+  "storage": {
+    "failedToGetApiKey": "Failed to retrieve saved API key",
+    "failedToGetReward": "Failed to retrieve saved reward value",
+    "failedToGetRollover": "Failed to retrieve saved rollover value",
+    "failedToSaveApiKey": "Failed to save API key",
+    "failedToSaveReward": "Failed to save reward value",
+    "failedToSaveRollover": "Failed to save rollover value"
+  },
+  "api": {
+    "validation": {
+      "cannotBeEmpty": "API key cannot be empty",
+      "mustStartWithWaka": "Api key must start with 'waka_'",
+      "atLeast20Characters": "Api key must be at least 20 characters long",
+      "atMost50Characters": "Api key cannot be longer than 50 characters",
+      "inValid": "Api key can only contain letters, numbers, and underscores"
+    },
+    "responses": {
+      "permissionDenied": "Permission denied to read stats",
+      "tooManyRequests": "Too many requests, try again in a few seconds",
+      "serverFailed": "Server failed, try again later.",
+      "notFoundError": "404? something isn't right, update app or create a issue.",
+      "networkError": "Network error: $error",
+      "badRequest": "A bad request happened",
+      "unAuthorized": "Api key is invalid."
+    }
+  }
+}

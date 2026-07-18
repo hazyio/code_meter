@@ -1,45 +1,51 @@
 import 'dart:convert';
 
+// import 'package:code_meter/i18n/app_localizations.dart';
+import 'package:code_meter/gen/i18n/strings.g.dart';
 import 'package:code_meter/utils/constraints.dart';
 import 'package:code_meter/utils/result.dart';
 import 'package:http/http.dart' as http;
 
-Result<String, String> validateApiKeyLocal(String apiKey) {
+Result<String, String> validateApiKeyLocal(
+  String apiKey,
+  // AppLocalizations translation,
+) {
+  final translation = t.api.validation;
   if (apiKey.isEmpty) {
-    return Result<String, String>.err('API key cannot be empty');
+    return Result<String, String>.err(translation.cannotBeEmpty);
   }
   if (!apiKey.startsWith("waka_")) {
-    return Result<String, String>.err('Api key must start with "waka_"');
+    return Result<String, String>.err(translation.mustStartWithWaka);
   }
   if (apiKey.length < 20) {
-    return Result<String, String>.err(
-      'Api key must be at least 20 characters long',
-    );
+    return Result<String, String>.err(translation.atLeast20Characters);
   }
   if (!RegExp(r'^[a-zA-Z0-9_-]+$').hasMatch(apiKey)) {
-    return Result<String, String>.err(
-      'Api key can only contain letters, numbers, and underscores',
-    );
+    return Result<String, String>.err(translation.inValid);
   }
   if (apiKey.length > 50) {
-    return Result<String, String>.err(
-      'Api key cannot be longer than 50 characters',
-    );
+    return Result<String, String>.err(translation.atMost50Characters);
   }
   return Result<String, String>.ok(apiKey);
 }
 
 Future<Result<String, String>> validateApiKeyRemote(String apiKey) async {
+  final translation = t.api;
   if (apiKey.isEmpty) {
-    return Result<String, String>.err('API key cannot be empty');
+    return Result<String, String>.err(translation.validation.cannotBeEmpty);
   }
-  await Future.delayed(const Duration(seconds: 2));
-
-  return Result<String, String>.err('API key cannot be empty');
-  // return Result<String, String>.ok("Key Good");
+  final result = await getTodaySeconds(apiKey);
+  switch (result) {
+    case Ok<int, String>():
+      // TODO: Handle this case.
+      throw UnimplementedError();
+    case Err<int, String>(error: final e):
+      return Result<String, String>.err(e);
+  }
 }
 
 Future<Result<int, String>> getTodaySeconds(String apiKey) async {
+  final translation = t.api.responses;
   try {
     final url = Uri.parse(Constraints.wakaTimeApiStatToday);
     final response = await http.get(
@@ -49,19 +55,23 @@ Future<Result<int, String>> getTodaySeconds(String apiKey) async {
     switch (response.statusCode) {
       case 200:
         return Ok(400);
+      case 401:
+        return Err(translation.unAuthorized);
+      case 400:
+        return Err(translation.badRequest);
       case 403:
-        return Err("Permission denied to read stats");
+        return Err(translation.permissionDenied);
       case 429:
-        return Err("Too many requests, try again in a few seconds");
+        return Err(translation.tooManyRequests);
       case 500:
-        return Err("Server failed, try again later.");
+        return Err(translation.serverFailed);
 
       case 404:
-        return Err("404, something isn't right. update app or create a issue.");
+        return Err(translation.notFoundError);
       default:
-        return Err('An  unexpected error occurred, try again later.');
+        return Err(t.unExpectedError);
     }
   } catch (e) {
-    return Err('Network error: $e');
+    return Err(translation.networkError(error: e));
   }
 }

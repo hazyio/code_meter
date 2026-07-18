@@ -1,3 +1,5 @@
+import 'package:code_meter/gen/i18n/strings.g.dart';
+import 'package:code_meter/utils/result.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -5,12 +7,19 @@ import 'package:url_launcher/url_launcher.dart';
 void showSnackBar(
   BuildContext context,
   String message, {
-  String actionLabel = "Ok",
+  String actionLabel = "",
   VoidCallback? onPressed,
+  int duration = 4,
 }) {
+  if (actionLabel == "") {
+    actionLabel = t.ok;
+  }
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
       content: Text(message),
+      behavior: SnackBarBehavior.floating,
+      duration: Duration(seconds: duration),
+      dismissDirection: DismissDirection.horizontal,
       action: SnackBarAction(
         label: actionLabel,
         onPressed: () {
@@ -55,4 +64,13 @@ Future<void> openUrl(BuildContext context, final String url) async {
 Future<void> copyToClipboard(BuildContext context, String text) async {
   await Clipboard.setData(ClipboardData(text: text));
   showSnackBar(context, 'Copied to clipboard');
+}
+
+Future<Result<String, String>> saveSettings(
+  String apiKey,
+  int rewardPercent,
+  bool allowRollover,
+) async {
+  // if (!await)
+  return Result<String, String>.ok("ok");
 }

@@ -1,5 +1,7 @@
 import 'package:code_meter/components/full_width.dart';
 import 'package:code_meter/components/loading_button.dart';
+import 'package:code_meter/components/locales_selector.dart';
+import 'package:code_meter/gen/i18n/strings.g.dart';
 import 'package:code_meter/theme/app_dimens.dart';
 import 'package:code_meter/utils/api.dart';
 import 'package:code_meter/utils/app_urls.dart';
@@ -9,6 +11,8 @@ import 'package:code_meter/utils/misc.dart';
 import 'package:code_meter/utils/result.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
+final translation = t;
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({super.key});
@@ -53,7 +57,7 @@ class _WelcomePageState extends State<WelcomePage> {
             showSnackBar(
               context,
               e,
-              actionLabel: "Try Again",
+              actionLabel: translation.tryAgain,
               onPressed: () async {
                 await _saveSettings();
               },
@@ -66,6 +70,7 @@ class _WelcomePageState extends State<WelcomePage> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
@@ -77,13 +82,13 @@ class _WelcomePageState extends State<WelcomePage> {
             children: [
               const SizedBox(height: 30),
               Text(
-                'Earn Screen Time by Coding',
+                translation.welcomeTitle,
                 style: fromTextTheme(theme).headlineMedium,
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 30),
               Text(
-                'Connect your WakaTime account and decide how coding hours convert into device usage.',
+                translation.welcomeDescription,
                 style: fromTextTheme(theme).titleMedium?.copyWith(
                   color: fromColorScheme(theme).secondaryFixedDim,
                 ),
@@ -100,7 +105,7 @@ class _WelcomePageState extends State<WelcomePage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Wakatime API Key',
+                          translation.wakaApiKey,
                           style: fromTextTheme(theme).labelLarge,
                         ),
                         SizedBox(height: 8),
@@ -150,12 +155,30 @@ class _WelcomePageState extends State<WelcomePage> {
                             }
                           },
                         ),
-                        const SizedBox(height: 40),
+
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            TextButton(
+                              onPressed: () {
+                                openUrl(context, AppUrls.wakaTimeApiPage);
+                              },
+                              child: Text(
+                                translation.openWakaTimeApiPage,
+                                style: fromTextTheme(theme).bodySmall?.copyWith(
+                                  color: Theme.of(context).colorScheme.primary,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        const SizedBox(height: 10),
                         Row(
                           children: [
                             Expanded(
                               child: Text(
-                                "Reward Percentage",
+                                translation.rewardPercentage,
                                 style: fromTextTheme(theme).labelLarge,
                               ),
                             ),
@@ -181,6 +204,7 @@ class _WelcomePageState extends State<WelcomePage> {
                                 },
                         ),
                         const SizedBox(height: 15),
+
                         Container(
                           padding: const EdgeInsets.all(AppSpacing.gutter),
                           decoration: BoxDecoration(
@@ -201,7 +225,12 @@ class _WelcomePageState extends State<WelcomePage> {
                               const SizedBox(width: 12),
                               Expanded(
                                 child: Text(
-                                  '1 coding hour = ${percentToTimeString(_rewardPercentage, 3600)} of device time ',
+                                  t.codingTime(
+                                    convert: percentToTimeString(
+                                      _rewardPercentage,
+                                      3600,
+                                    ),
+                                  ),
                                   style: fromTextTheme(theme).bodySmall
                                       ?.copyWith(
                                         color: fromColorScheme(
@@ -215,8 +244,8 @@ class _WelcomePageState extends State<WelcomePage> {
                         ),
                         const SizedBox(height: 30),
                         Divider(height: 20),
-
-                        const SizedBox(height: 10),
+                        const SizedBox(height: 15),
+                        // RollOver
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -226,12 +255,12 @@ class _WelcomePageState extends State<WelcomePage> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "Allow Time Rollover",
+                                    translation.allowRollover,
                                     style: fromTextTheme(theme).titleMedium,
                                   ),
                                   const SizedBox(height: 5),
                                   Text(
-                                    "Unused earned time carries over to the next day.",
+                                    translation.allowRolloverDescription,
                                     style: fromTextTheme(theme).bodySmall,
                                   ),
                                 ],
@@ -250,14 +279,19 @@ class _WelcomePageState extends State<WelcomePage> {
                             ),
                           ],
                         ),
+                        const SizedBox(height: 15),
+                        Divider(height: 20),
+
+                        LanguageSelector(),
                         const SizedBox(height: 50),
+
                         LoadingButton(
                           isLoading: _isProcessing,
                           onPressed: _saveSettings,
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Text('Save'),
+                              Text(translation.save),
                               SizedBox(width: 8),
                               Icon(Icons.arrow_forward),
                             ],
@@ -274,7 +308,7 @@ class _WelcomePageState extends State<WelcomePage> {
                   openUrl(context, AppUrls.githubRepo);
                 },
                 child: Text(
-                  'Open Source On Github',
+                  translation.openSourceOnGithub,
                   style: fromTextTheme(theme).bodySmall?.copyWith(
                     color: Theme.of(context).colorScheme.primary,
                   ),
