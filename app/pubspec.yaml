@@ -1,0 +1,51 @@
+name: code_meter
+description: "An Android app that gates your screen time using your WakaTime stats."
+# The following line prevents the package from being accidentally published to
+# pub.dev using `flutter pub publish`. This is preferred for private packages.
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.12.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+  cupertino_icons: ^1.0.8
+  dynamic_color: ^1.7.0
+  url_launcher: ^6.3.2
+  flutter_native_splash: ^2.4.8
+  http: ^1.6.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_launcher_icons: "^0.14.4"
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.19.0
+  flutter_lints: ^6.0.0
+
+# The following section is specific to Flutter packages.
+flutter:
+  generate: true # enables code generation from ARB files
+  uses-material-design: true
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  image_path: "assets/icon/icon.png"
+  adaptive_icon_background: "#121414"
+  adaptive_icon_foreground: "assets/icon/icon_foreground.png"
+
+flutter_native_splash:
+  color: "#FBF9F9"
+  color_dark: "#121414"
+  image: "assets/icon/icon_foreground.png"
+  android: true
+  android_12:
+    image: "assets/icon/icon_foreground.png"
+    icon_background_color: "#FBF9F9"
+    icon_background_color_dark: "#121414"
