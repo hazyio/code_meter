@@ -75,20 +75,20 @@ abstraction, so there's no iOS build planned at this time.
 
 ### Setup
 
-\`\`\`bash
+```bash
 git clone https://github.com/hazyio/code_meter.git
 cd code_meter
 flutter pub get
-\`\`\`
+```
 
 Because Code Meter includes native Kotlin code for usage tracking (via platform channels), running
 `flutter run` will trigger a native Android build the first time — this is expected and normal, not
 an error. No build-time secrets or `.env` files are required, since the WakaTime API key is entered
 by the user at runtime during onboarding, not baked into the build.
 
-\`\`\`bash
+```bash
 flutter run
-\`\`\`
+```
 
 ## Contributing
 
@@ -109,3 +109,4 @@ distribute.
 
 - [WakaTime](https://wakatime.com) for the coding-activity API this app is built around. Code Meter is
   an independent, unofficial client and is not affiliated with or endorsed by WakaTime.
+- [Icon Kitchen](https://icon.kitchen/) for the app icon and splash screen assets, without which this app icon would be off and the splash screen would be a blank white screen.
