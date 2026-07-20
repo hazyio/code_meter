@@ -92,8 +92,24 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 	/// en: 'Dashboard'
 	String get dashboard => 'Dashboard';
 
+	late final Translations$settings$en settings = Translations$settings$en.internal(_root);
 	late final Translations$storage$en storage = Translations$storage$en.internal(_root);
 	late final Translations$api$en api = Translations$api$en.internal(_root);
+}
+
+// Path: settings
+class Translations$settings$en {
+	Translations$settings$en.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Settings saved'
+	String get saved => 'Settings saved';
+
+	/// en: 'Failed to save settings $error'
+	String failedToSave({required Object error}) => 'Failed to save settings ${error}';
 }
 
 // Path: storage
@@ -213,6 +229,8 @@ extension on Translations {
 			'history' => 'History',
 			'apps' => 'Apps',
 			'dashboard' => 'Dashboard',
+			'settings.saved' => 'Settings saved',
+			'settings.failedToSave' => ({required Object error}) => 'Failed to save settings ${error}',
 			'storage.failedToGetApiKey' => 'Failed to retrieve saved API key',
 			'storage.failedToGetReward' => 'Failed to retrieve saved reward value',
 			'storage.failedToGetRollover' => 'Failed to retrieve saved rollover value',

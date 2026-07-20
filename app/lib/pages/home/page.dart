@@ -1,8 +1,7 @@
 import 'package:code_meter/gen/i18n/strings.g.dart';
 import 'package:code_meter/pages/home/apps.dart';
 import 'package:code_meter/pages/home/history.dart';
-import 'package:code_meter/pages/home/home.dart';
-import 'package:code_meter/theme/app_dimens.dart';
+import 'package:code_meter/pages/home/dashboard.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -14,12 +13,10 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int currentPageIndex = 0;
-  
 
   @override
   Widget build(BuildContext context) {
     final translation = t;
-   
 
     return Scaffold(
       bottomNavigationBar: NavigationBar(
@@ -51,7 +48,7 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       body: <Widget>[
-        HomeSubPage(),
+        DashBoardSubPage(),
         AppsSubPage(),
         HistorySubPage(),
       ][currentPageIndex],

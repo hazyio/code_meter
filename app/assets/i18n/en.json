@@ -16,6 +16,10 @@
   "history": "History",
   "apps": "Apps",
   "dashboard": "Dashboard",
+  "settings": {
+    "saved": "Settings saved",
+    "failedToSave": "Failed to save settings $error"
+  },
   "storage": {
     "failedToGetApiKey": "Failed to retrieve saved API key",
     "failedToGetReward": "Failed to retrieve saved reward value",

@@ -1,7 +1,7 @@
 import 'dart:developer' as developer show log;
 
 import 'package:code_meter/gen/i18n/strings.g.dart';
-import 'package:code_meter/utils/constraints.dart';
+import 'package:code_meter/utils/api.dart';
 import 'package:code_meter/utils/result.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -137,7 +137,14 @@ class SettingsStorage {
   }
 
   static Future<bool> settingSaved() async {
-    return true;
+    final apiKey = await SettingsRepository().getApiKey();
+    if (apiKey == null) return false;
+    switch (validateApiKeyLocal(apiKey)) {
+      case Ok():
+        return true;
+      case Err():
+        return false;
+    }
   }
 
   static Future<Result<SettingsStorage, String>> retrieve(

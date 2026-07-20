@@ -1,4 +1,3 @@
-import 'package:code_meter/components/full_width.dart';
 import 'package:code_meter/components/loading_button.dart';
 import 'package:code_meter/components/locales_selector.dart';
 import 'package:code_meter/gen/i18n/strings.g.dart';
@@ -9,6 +8,7 @@ import 'package:code_meter/utils/constraints.dart';
 import 'package:code_meter/utils/from_theme.dart';
 import 'package:code_meter/utils/misc.dart';
 import 'package:code_meter/utils/result.dart';
+import 'package:code_meter/utils/settings_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -46,17 +46,38 @@ class _WelcomePageState extends State<WelcomePage> {
       setState(() => _isProcessing = true);
       final result = await validateApiKeyRemote(_wakaTimeApiController.text);
       setState(() => _isProcessing = false);
-      if (!mounted) return;
       switch (result) {
         case Ok():
           {
-            showSnackBar(context, "message");
+            final saveSettings = await SettingsStorage(
+              apiKey: _wakaTimeApiController.text,
+              rewardPercent: _rewardPercentage,
+              allowRollover: _rollover,
+            ).save();
+            if (!mounted) return;
+            setState(() => _isProcessing = false);
+            switch (saveSettings) {
+              case Ok():
+                {
+                  await Navigator.pushNamed(context, '/home');
+                }
+
+              case Err(error: final e):
+                {
+                  showSnackBar(
+                    context,
+                    translation.settings.failedToSave(error: e),
+                    actionLabel: translation.tryAgain,
+                  );
+                }
+            }
           }
-        case Err(error: final e):
+        case Err():
           {
+            if (!mounted) return;
             showSnackBar(
               context,
-              e,
+              translation.unExpectedError,
               actionLabel: translation.tryAgain,
               onPressed: () async {
                 await _saveSettings();
