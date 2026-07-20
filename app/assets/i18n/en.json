@@ -1,21 +1,26 @@
 {
   "welcomeTitle": "Earn Screen Time by Coding",
-  "welcomeDescription": "Connect your WakaTime account and decide how coding hours convert into device usage.",
-  "save": "Save",
-  "rewardPercentage": "Reward Percentage",
-  "allowRollover": "Allow Time Rollover",
-  "allowRolloverDescription": "Unused earned time carries over to the next day.",
-  "wakaApiKey": "Wakatime API Key",
-  "unExpectedError": "An  unexpected error occurred, try again later.",
-  "codingTime": "1 coding hour = $convert of device time.",
-  "openSourceOnGithub": "Open Source On Github",
-  "ok": "Ok",
-  "tryAgain": "Try Again",
-  "openWakaTimeApiPage": "Open WakaTime API page",
-  "settingsLanguage": "Language",
-  "history": "History",
-  "apps": "Apps",
-  "dashboard": "Dashboard",
+  "description": {
+    "welcome": "Connect your WakaTime account and decide how coding hours convert into device usage.",
+    "allowRollover": "Unused earned time carries over to the next day."
+  },
+  "labels": {
+    "wakaApiKey": "Wakatime API Key",
+    "history": "History",
+    "apps": "Apps",
+    "dashboard": "Dashboard",
+    "settings": "Settings",
+    "tryAgain": "Try Again",
+    "openWakaTimeApiPage": "Open WakaTime API page",
+    "ok": "Ok",
+    "unExpectedError": "An  unexpected error occurred, try again later.",
+    "codingTime": "1 coding hour = $convert of device time.",
+    "openSourceOnGithub": "Open Source On Github",
+    "language": "Language",
+    "rewardPercentage": "Reward Percentage",
+    "save": "Save",
+    "allowRollover": "Allow Time Rollover"
+  },
   "settings": {
     "saved": "Settings saved",
     "failedToSave": "Failed to save settings $error"
@@ -44,6 +49,7 @@
       "networkError": "Network error: $error",
       "badRequest": "A bad request happened",
       "unAuthorized": "Api key is invalid."
-    }
+    },
+    "iconLabel": {}
   }
 }

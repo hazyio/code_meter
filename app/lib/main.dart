@@ -1,4 +1,5 @@
 import 'package:code_meter/gen/i18n/strings.g.dart';
+import 'package:code_meter/pages/analytics/page.dart';
 import 'package:code_meter/pages/home/page.dart';
 import 'package:code_meter/pages/settings/page.dart';
 import 'package:code_meter/pages/welcome/page.dart';
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
             '/home': (context) => const HomePage(),
             '/welcome': (context) => const WelcomePage(),
             '/settings': (context) => const SettingsPage(),
+            "/analytics": (context) => const AnalyticsPage(),
           },
         );
       },

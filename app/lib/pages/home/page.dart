@@ -31,19 +31,28 @@ class _HomePageState extends State<HomePage> {
         selectedIndex: currentPageIndex,
         destinations: <Widget>[
           NavigationDestination(
-            selectedIcon: Icon(Icons.dashboard),
-            icon: Icon(Icons.dashboard_outlined),
-            label: translation.dashboard,
+            selectedIcon: Icon(
+              Icons.space_dashboard_rounded,
+              semanticLabel: translation.labels.dashboard,
+            ),
+            icon: Icon(Icons.space_dashboard_outlined),
+            label: translation.labels.dashboard,
           ),
           NavigationDestination(
-            selectedIcon: Icon(Icons.apps_sharp),
+            selectedIcon: Icon(
+              Icons.apps,
+              semanticLabel: translation.labels.apps,
+            ),
             icon: Icon(Icons.apps_outlined),
-            label: translation.apps,
+            label: translation.labels.apps,
           ),
           NavigationDestination(
-            selectedIcon: Icon(Icons.history_rounded),
-            icon: Icon(Icons.history_outlined),
-            label: translation.history,
+            selectedIcon: Icon(Icons.history_toggle_off_rounded),
+            icon: Icon(
+              Icons.history_toggle_off_outlined,
+              semanticLabel: translation.labels.history,
+            ),
+            label: translation.labels.history,
           ),
         ],
       ),

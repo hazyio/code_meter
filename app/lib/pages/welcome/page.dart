@@ -67,7 +67,7 @@ class _WelcomePageState extends State<WelcomePage> {
                   showSnackBar(
                     context,
                     translation.settings.failedToSave(error: e),
-                    actionLabel: translation.tryAgain,
+                    actionLabel: translation.labels.tryAgain,
                   );
                 }
             }
@@ -77,8 +77,8 @@ class _WelcomePageState extends State<WelcomePage> {
             if (!mounted) return;
             showSnackBar(
               context,
-              translation.unExpectedError,
-              actionLabel: translation.tryAgain,
+              translation.labels.unExpectedError,
+              actionLabel: translation.labels.tryAgain,
               onPressed: () async {
                 await _saveSettings();
               },
@@ -109,7 +109,7 @@ class _WelcomePageState extends State<WelcomePage> {
               ),
               const SizedBox(height: 30),
               Text(
-                translation.welcomeDescription,
+                translation.description.welcome,
                 style: fromTextTheme(theme).titleMedium?.copyWith(
                   color: fromColorScheme(theme).secondaryFixedDim,
                 ),
@@ -126,7 +126,7 @@ class _WelcomePageState extends State<WelcomePage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          translation.wakaApiKey,
+                          translation.labels.wakaApiKey,
                           style: fromTextTheme(theme).labelLarge,
                         ),
                         SizedBox(height: 8),
@@ -185,7 +185,7 @@ class _WelcomePageState extends State<WelcomePage> {
                                 openUrl(context, AppUrls.wakaTimeApiPage);
                               },
                               child: Text(
-                                translation.openWakaTimeApiPage,
+                                translation.labels.openWakaTimeApiPage,
                                 style: fromTextTheme(theme).bodySmall?.copyWith(
                                   color: Theme.of(context).colorScheme.primary,
                                 ),
@@ -199,7 +199,7 @@ class _WelcomePageState extends State<WelcomePage> {
                           children: [
                             Expanded(
                               child: Text(
-                                translation.rewardPercentage,
+                                translation.labels.rewardPercentage,
                                 style: fromTextTheme(theme).labelLarge,
                               ),
                             ),
@@ -246,7 +246,7 @@ class _WelcomePageState extends State<WelcomePage> {
                               const SizedBox(width: 12),
                               Expanded(
                                 child: Text(
-                                  t.codingTime(
+                                  t.labels.codingTime(
                                     convert: percentToTimeString(
                                       _rewardPercentage,
                                       3600,
@@ -276,12 +276,12 @@ class _WelcomePageState extends State<WelcomePage> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    translation.allowRollover,
+                                    translation.labels.allowRollover,
                                     style: fromTextTheme(theme).titleMedium,
                                   ),
                                   const SizedBox(height: 5),
                                   Text(
-                                    translation.allowRolloverDescription,
+                                    translation.description.allowRollover,
                                     style: fromTextTheme(theme).bodySmall,
                                   ),
                                 ],
@@ -312,7 +312,7 @@ class _WelcomePageState extends State<WelcomePage> {
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Text(translation.save),
+                              Text(translation.labels.save),
                               SizedBox(width: 8),
                               Icon(Icons.arrow_forward),
                             ],
@@ -329,7 +329,7 @@ class _WelcomePageState extends State<WelcomePage> {
                   openUrl(context, AppUrls.githubRepo);
                 },
                 child: Text(
-                  translation.openSourceOnGithub,
+                  translation.labels.openSourceOnGithub,
                   style: fromTextTheme(theme).bodySmall?.copyWith(
                     color: Theme.of(context).colorScheme.primary,
                   ),

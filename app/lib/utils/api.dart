@@ -68,7 +68,7 @@ Future<Result<int, String>> getTodaySeconds(String apiKey) async {
       case 404:
         return Err(translation.notFoundError);
       default:
-        return Err(t.unExpectedError);
+        return Err(t.labels.unExpectedError);
     }
   } catch (e) {
     return Err(translation.networkError(error: e));

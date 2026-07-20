@@ -44,44 +44,38 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 	/// en: 'Earn Screen Time by Coding'
 	String get welcomeTitle => 'Earn Screen Time by Coding';
 
+	late final Translations$description$en description = Translations$description$en.internal(_root);
+	late final Translations$labels$en labels = Translations$labels$en.internal(_root);
+	late final Translations$settings$en settings = Translations$settings$en.internal(_root);
+	late final Translations$storage$en storage = Translations$storage$en.internal(_root);
+	late final Translations$api$en api = Translations$api$en.internal(_root);
+}
+
+// Path: description
+class Translations$description$en {
+	Translations$description$en.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
 	/// en: 'Connect your WakaTime account and decide how coding hours convert into device usage.'
-	String get welcomeDescription => 'Connect your WakaTime account and decide how coding hours convert into device usage.';
-
-	/// en: 'Save'
-	String get save => 'Save';
-
-	/// en: 'Reward Percentage'
-	String get rewardPercentage => 'Reward Percentage';
-
-	/// en: 'Allow Time Rollover'
-	String get allowRollover => 'Allow Time Rollover';
+	String get welcome => 'Connect your WakaTime account and decide how coding hours convert into device usage.';
 
 	/// en: 'Unused earned time carries over to the next day.'
-	String get allowRolloverDescription => 'Unused earned time carries over to the next day.';
+	String get allowRollover => 'Unused earned time carries over to the next day.';
+}
+
+// Path: labels
+class Translations$labels$en {
+	Translations$labels$en.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
 
 	/// en: 'Wakatime API Key'
 	String get wakaApiKey => 'Wakatime API Key';
-
-	/// en: 'An unexpected error occurred, try again later.'
-	String get unExpectedError => 'An  unexpected error occurred, try again later.';
-
-	/// en: '1 coding hour = $convert of device time.'
-	String codingTime({required Object convert}) => '1 coding hour = ${convert} of device time.';
-
-	/// en: 'Open Source On Github'
-	String get openSourceOnGithub => 'Open Source On Github';
-
-	/// en: 'Ok'
-	String get ok => 'Ok';
-
-	/// en: 'Try Again'
-	String get tryAgain => 'Try Again';
-
-	/// en: 'Open WakaTime API page'
-	String get openWakaTimeApiPage => 'Open WakaTime API page';
-
-	/// en: 'Language'
-	String get settingsLanguage => 'Language';
 
 	/// en: 'History'
 	String get history => 'History';
@@ -92,9 +86,38 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 	/// en: 'Dashboard'
 	String get dashboard => 'Dashboard';
 
-	late final Translations$settings$en settings = Translations$settings$en.internal(_root);
-	late final Translations$storage$en storage = Translations$storage$en.internal(_root);
-	late final Translations$api$en api = Translations$api$en.internal(_root);
+	/// en: 'Settings'
+	String get settings => 'Settings';
+
+	/// en: 'Try Again'
+	String get tryAgain => 'Try Again';
+
+	/// en: 'Open WakaTime API page'
+	String get openWakaTimeApiPage => 'Open WakaTime API page';
+
+	/// en: 'Ok'
+	String get ok => 'Ok';
+
+	/// en: 'An unexpected error occurred, try again later.'
+	String get unExpectedError => 'An  unexpected error occurred, try again later.';
+
+	/// en: '1 coding hour = $convert of device time.'
+	String codingTime({required Object convert}) => '1 coding hour = ${convert} of device time.';
+
+	/// en: 'Open Source On Github'
+	String get openSourceOnGithub => 'Open Source On Github';
+
+	/// en: 'Language'
+	String get language => 'Language';
+
+	/// en: 'Reward Percentage'
+	String get rewardPercentage => 'Reward Percentage';
+
+	/// en: 'Save'
+	String get save => 'Save';
+
+	/// en: 'Allow Time Rollover'
+	String get allowRollover => 'Allow Time Rollover';
 }
 
 // Path: settings
@@ -213,22 +236,23 @@ extension on Translations {
 	dynamic _flatMapFunction(String path) {
 		return switch (path) {
 			'welcomeTitle' => 'Earn Screen Time by Coding',
-			'welcomeDescription' => 'Connect your WakaTime account and decide how coding hours convert into device usage.',
-			'save' => 'Save',
-			'rewardPercentage' => 'Reward Percentage',
-			'allowRollover' => 'Allow Time Rollover',
-			'allowRolloverDescription' => 'Unused earned time carries over to the next day.',
-			'wakaApiKey' => 'Wakatime API Key',
-			'unExpectedError' => 'An  unexpected error occurred, try again later.',
-			'codingTime' => ({required Object convert}) => '1 coding hour = ${convert} of device time.',
-			'openSourceOnGithub' => 'Open Source On Github',
-			'ok' => 'Ok',
-			'tryAgain' => 'Try Again',
-			'openWakaTimeApiPage' => 'Open WakaTime API page',
-			'settingsLanguage' => 'Language',
-			'history' => 'History',
-			'apps' => 'Apps',
-			'dashboard' => 'Dashboard',
+			'description.welcome' => 'Connect your WakaTime account and decide how coding hours convert into device usage.',
+			'description.allowRollover' => 'Unused earned time carries over to the next day.',
+			'labels.wakaApiKey' => 'Wakatime API Key',
+			'labels.history' => 'History',
+			'labels.apps' => 'Apps',
+			'labels.dashboard' => 'Dashboard',
+			'labels.settings' => 'Settings',
+			'labels.tryAgain' => 'Try Again',
+			'labels.openWakaTimeApiPage' => 'Open WakaTime API page',
+			'labels.ok' => 'Ok',
+			'labels.unExpectedError' => 'An  unexpected error occurred, try again later.',
+			'labels.codingTime' => ({required Object convert}) => '1 coding hour = ${convert} of device time.',
+			'labels.openSourceOnGithub' => 'Open Source On Github',
+			'labels.language' => 'Language',
+			'labels.rewardPercentage' => 'Reward Percentage',
+			'labels.save' => 'Save',
+			'labels.allowRollover' => 'Allow Time Rollover',
 			'settings.saved' => 'Settings saved',
 			'settings.failedToSave' => ({required Object error}) => 'Failed to save settings ${error}',
 			'storage.failedToGetApiKey' => 'Failed to retrieve saved API key',
