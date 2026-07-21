@@ -79,9 +79,9 @@ Future<Result<int, String>> getTodaySeconds(String apiKey) async {
 
 Future<String?> fetchEssentialApps() async {
   const sources = [
+    'https://codemeter.hazyio.come/essential_apps.txt',
     "https://cdn.statically.io/gh/hazyio/code_meter@main/data/essential_apps.txt",
     'https://raw.githubusercontent.com/hazyio/code_meter/main/data/essential_apps.txt',
-    'https://codemeter.hazyio.come/essential_apps.txt',
   ];
   for (final url in sources) {
     try {

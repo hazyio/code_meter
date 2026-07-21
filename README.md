@@ -107,6 +107,10 @@ For example:
 com.google.android.apps.maps,https://play.google.com/store/apps/details?id=com.google.android.apps.maps
 ```
 
+Once deployed, the file is also served directly from the project's own site at
+[`codemeter.hazyio.com/essential_apps.txt`](https://codemeter.hazyio.com/essential_apps.txt) — an
+additional, GitHub-independent source the app can fall back to.
+
 **Fastest way to add one:** click below to edit the file directly on GitHub — it'll fork the repo
 and open a pull request for you automatically, no local clone needed.
 
