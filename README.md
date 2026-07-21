@@ -95,7 +95,7 @@ flutter run
 The Allowed Apps list is built from apps that report a launcher entry on your device — a small
 number of apps you rely on daily (dialers, messaging apps, some pre-installed system apps) can be
 filtered out unintentionally. Essential apps are tracked in
-[`data/essential_apps.txt`](data/essential_apps.txt), one per line, in the format:
+[`site/static/essential_apps.txt`](site/static/essential_apps.txt), one per line, in the format:
 
 ```
 appid,link
@@ -110,7 +110,7 @@ com.google.android.apps.maps,https://play.google.com/store/apps/details?id=com.g
 **Fastest way to add one:** click below to edit the file directly on GitHub — it'll fork the repo
 and open a pull request for you automatically, no local clone needed.
 
-👉 [**Edit `essential_apps.txt` and open a PR**](../../edit/main/data/essential_apps.txt)
+👉 [**Edit `essential_apps.txt` and open a PR**](../../edit/main/site/static/essential_apps.txt)
 
 Prefer not to open a PR yourself? [Open a Missing App report](../../issues/new?template=missing_app.yml)
 instead with the app's package name and a link to its store or download page, and it'll be added

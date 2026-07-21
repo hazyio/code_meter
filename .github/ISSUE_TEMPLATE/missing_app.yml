@@ -7,7 +7,7 @@ body:
     attributes:
       value: |
         Code Meter's essential-apps list lives at
-        [`data/essential_apps.txt`](https://github.com/hazyio/code_meter/blob/main/data/essential_apps.txt)
+        [`site/static/essential_apps.txt`](https://github.com/hazyio/code_meter/blob/main/site/static/essential_apps.txt)
         in this repo, one app per line, in the format:
 
         ```
@@ -23,7 +23,7 @@ body:
         **The fastest way to get an app added is to edit the file yourself and open a pull
         request** — GitHub will fork the repo and start the PR for you automatically:
 
-        👉 [**Edit `essential_apps.txt` and open a PR**](https://github.com/hazyio/code_meter/edit/main/data/essential_apps.txt)
+        👉 [**Edit `essential_apps.txt` and open a PR**](https://github.com/hazyio/code_meter/edit/main/site/static/essential_apps.txt)
 
         Just add your line(s) in the same `appid,link` format, then submit — no need to clone
         anything locally.
