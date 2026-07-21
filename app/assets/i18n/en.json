@@ -2,9 +2,11 @@
   "welcomeTitle": "Earn Screen Time by Coding",
   "description": {
     "welcome": "Connect your WakaTime account and decide how coding hours convert into device usage.",
-    "allowRollover": "Unused earned time carries over to the next day."
+    "allowRollover": "Unused earned time carries over to the next day.",
+    "missingApp": "Missing app? Create issue on Github to add."
   },
   "labels": {
+    "appName": "Code Meter",
     "wakaApiKey": "Wakatime API Key",
     "history": "History",
     "apps": "Apps",
@@ -19,7 +21,18 @@
     "language": "Language",
     "rewardPercentage": "Reward Percentage",
     "save": "Save",
-    "allowRollover": "Allow Time Rollover"
+    "allowRollover": "Allow Time Rollover",
+    "timeRemaining": "Time Remaining",
+    "timeCount": "${hour}h ${minutes}m",
+    "earned": "Earned",
+    "used": "Used",
+    "syncWithWakaTime": "Sync with WakaTime",
+    "lastSynced": "Last synced: $datetime",
+    "topUsedApps": "Top Used Apps",
+    "gettingApps": "Getting apps...",
+    "all": "All",
+    "system": "System",
+    "installed": "Installed"
   },
   "settings": {
     "saved": "Settings saved",

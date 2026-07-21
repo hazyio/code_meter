@@ -74,6 +74,9 @@ class Translations$labels$en {
 
 	// Translations
 
+	/// en: 'Code Meter'
+	String get appName => 'Code Meter';
+
 	/// en: 'Wakatime API Key'
 	String get wakaApiKey => 'Wakatime API Key';
 
@@ -118,6 +121,39 @@ class Translations$labels$en {
 
 	/// en: 'Allow Time Rollover'
 	String get allowRollover => 'Allow Time Rollover';
+
+	/// en: 'Time Remaining'
+	String get timeRemaining => 'Time Remaining';
+
+	/// en: '${hour}h ${minutes}m'
+	String timeCount({required Object hour, required Object minutes}) => '${hour}h ${minutes}m';
+
+	/// en: 'Earned'
+	String get earned => 'Earned';
+
+	/// en: 'Used'
+	String get used => 'Used';
+
+	/// en: 'Sync with WakaTime'
+	String get syncWithWakaTime => 'Sync with WakaTime';
+
+	/// en: 'Last synced: $datetime'
+	String lastSynced({required Object datetime}) => 'Last synced: ${datetime}';
+
+	/// en: 'Top Used Apps'
+	String get topUsedApps => 'Top Used Apps';
+
+	/// en: 'Getting apps...'
+	String get gettingApps => 'Getting apps...';
+
+	/// en: 'All'
+	String get all => 'All';
+
+	/// en: 'System'
+	String get system => 'System';
+
+	/// en: 'Installed'
+	String get installed => 'Installed';
 }
 
 // Path: settings
@@ -238,6 +274,7 @@ extension on Translations {
 			'welcomeTitle' => 'Earn Screen Time by Coding',
 			'description.welcome' => 'Connect your WakaTime account and decide how coding hours convert into device usage.',
 			'description.allowRollover' => 'Unused earned time carries over to the next day.',
+			'labels.appName' => 'Code Meter',
 			'labels.wakaApiKey' => 'Wakatime API Key',
 			'labels.history' => 'History',
 			'labels.apps' => 'Apps',
@@ -253,6 +290,17 @@ extension on Translations {
 			'labels.rewardPercentage' => 'Reward Percentage',
 			'labels.save' => 'Save',
 			'labels.allowRollover' => 'Allow Time Rollover',
+			'labels.timeRemaining' => 'Time Remaining',
+			'labels.timeCount' => ({required Object hour, required Object minutes}) => '${hour}h ${minutes}m',
+			'labels.earned' => 'Earned',
+			'labels.used' => 'Used',
+			'labels.syncWithWakaTime' => 'Sync with WakaTime',
+			'labels.lastSynced' => ({required Object datetime}) => 'Last synced: ${datetime}',
+			'labels.topUsedApps' => 'Top Used Apps',
+			'labels.gettingApps' => 'Getting apps...',
+			'labels.all' => 'All',
+			'labels.system' => 'System',
+			'labels.installed' => 'Installed',
 			'settings.saved' => 'Settings saved',
 			'settings.failedToSave' => ({required Object error}) => 'Failed to save settings ${error}',
 			'storage.failedToGetApiKey' => 'Failed to retrieve saved API key',

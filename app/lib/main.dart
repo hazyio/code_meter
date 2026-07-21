@@ -30,7 +30,6 @@ class MyApp extends StatelessWidget {
           theme: AppTheme.light(dynamicScheme: lightDynamic),
           darkTheme: AppTheme.dark(dynamicScheme: darkDynamic),
           themeMode: ThemeMode.system,
-
           initialRoute: initialRoute,
           routes: {
             '/home': (context) => const HomePage(),

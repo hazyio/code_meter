@@ -5,4 +5,4 @@ contact_links:
     about: Questions about using Commit should go here, not as an issue
   - name: WakaTime API / account issues
     url: https://wakatime.com/contact
-    about: Issues with your WakaTime account, API key, or coding stats should be reported to WakaTime directly, not here
+    about: Issues with your WakaTime account, API key, or coding stats should be reported to WakaTime directly, not here 

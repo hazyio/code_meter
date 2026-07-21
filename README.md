@@ -90,6 +90,14 @@ by the user at runtime during onboarding, not baked into the build.
 flutter run
 ```
 
+## Missing an app?
+
+The Allowed Apps list is built from apps that report a launcher entry on your device — a small
+number of apps you rely on daily (dialers, messaging apps, some pre-installed system apps) can be
+filtered out unintentionally. If something essential to your everyday use isn't showing up,
+[open a Missing App report](../../issues/new?template=missing_app.yml) with the app's package name
+and a link to its store or download page, and it'll be looked into.
+
 ## Contributing
 
 Contributions are welcome — see [CONTRIBUTING.md](CONTRIBUTING.md) for setup details, coding

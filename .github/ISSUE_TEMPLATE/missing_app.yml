@@ -1,0 +1,43 @@
+name: Missing Essential App
+description: Report an app that's essential to everyday device use but isn't showing up in the Allowed Apps list.
+title: "[Missing App] "
+labels: ["missing-app"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this to report an app that should be selectable in Code Meter's **Allowed Apps** list but isn't showing up — for example, a phone dialer, messaging app, or other app you rely on daily that got filtered out.
+
+  - type: textarea
+    id: apps
+    attributes:
+      label: Missing app(s)
+      description: >
+        One app per line, in the format `appid,link` — where `appid` is the app's Android
+        package name (e.g. `com.google.android.apps.maps`) and `link` is either its Play Store
+        listing or its official landing/download page. You can list more than one app.
+      placeholder: |
+        com.google.android.apps.maps,https://play.google.com/store/apps/details?id=com.google.android.apps.maps
+        com.example.messenger,https://example.com/download
+    validations:
+      required: true
+
+  - type: dropdown
+    id: app-type
+    attributes:
+      label: App type
+      description: Is this a pre-installed system app, or one you installed yourself?
+      options:
+        - System app (came pre-installed on the device)
+        - Third-party app (installed from Play Store, F-Droid, APK, etc.)
+        - Not sure
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Device brand/model, Android version, or anything else that might help track this down.
+    validations:
+      required: false

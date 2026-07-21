@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: NavigationBar(
         height: 60.0,
 
-        labelBehavior: .onlyShowSelected,
+        // labelBehavior: .onlyShowSelected,
         onDestinationSelected: (int index) {
           setState(() {
             currentPageIndex = index;
@@ -32,24 +32,24 @@ class _HomePageState extends State<HomePage> {
         destinations: <Widget>[
           NavigationDestination(
             selectedIcon: Icon(
-              Icons.space_dashboard_rounded,
+              Icons.dashboard_rounded,
               semanticLabel: translation.labels.dashboard,
             ),
-            icon: Icon(Icons.space_dashboard_outlined),
+            icon: Icon(Icons.dashboard_outlined),
             label: translation.labels.dashboard,
           ),
           NavigationDestination(
             selectedIcon: Icon(
-              Icons.apps,
+              Icons.widgets,
               semanticLabel: translation.labels.apps,
             ),
-            icon: Icon(Icons.apps_outlined),
+            icon: Icon(Icons.widgets_outlined),
             label: translation.labels.apps,
           ),
           NavigationDestination(
-            selectedIcon: Icon(Icons.history_toggle_off_rounded),
+            selectedIcon: Icon(Icons.watch_later),
             icon: Icon(
-              Icons.history_toggle_off_outlined,
+              Icons.watch_later_outlined,
               semanticLabel: translation.labels.history,
             ),
             label: translation.labels.history,
