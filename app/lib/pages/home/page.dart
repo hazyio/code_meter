@@ -1,8 +1,7 @@
 import 'package:code_meter/gen/i18n/strings.g.dart';
 import 'package:code_meter/pages/home/apps.dart';
 import 'package:code_meter/pages/home/history.dart';
-import 'package:code_meter/pages/home/home.dart';
-import 'package:code_meter/theme/app_dimens.dart';
+import 'package:code_meter/pages/home/dashboard.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -14,18 +13,16 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int currentPageIndex = 0;
-  
 
   @override
   Widget build(BuildContext context) {
     final translation = t;
-   
 
     return Scaffold(
       bottomNavigationBar: NavigationBar(
         height: 60.0,
 
-        labelBehavior: .onlyShowSelected,
+        // labelBehavior: .onlyShowSelected,
         onDestinationSelected: (int index) {
           setState(() {
             currentPageIndex = index;
@@ -34,24 +31,33 @@ class _HomePageState extends State<HomePage> {
         selectedIndex: currentPageIndex,
         destinations: <Widget>[
           NavigationDestination(
-            selectedIcon: Icon(Icons.dashboard),
+            selectedIcon: Icon(
+              Icons.dashboard_rounded,
+              semanticLabel: translation.labels.dashboard,
+            ),
             icon: Icon(Icons.dashboard_outlined),
-            label: translation.dashboard,
+            label: translation.labels.dashboard,
           ),
           NavigationDestination(
-            selectedIcon: Icon(Icons.apps_sharp),
-            icon: Icon(Icons.apps_outlined),
-            label: translation.apps,
+            selectedIcon: Icon(
+              Icons.widgets,
+              semanticLabel: translation.labels.apps,
+            ),
+            icon: Icon(Icons.widgets_outlined),
+            label: translation.labels.apps,
           ),
           NavigationDestination(
-            selectedIcon: Icon(Icons.history_rounded),
-            icon: Icon(Icons.history_outlined),
-            label: translation.history,
+            selectedIcon: Icon(Icons.watch_later),
+            icon: Icon(
+              Icons.watch_later_outlined,
+              semanticLabel: translation.labels.history,
+            ),
+            label: translation.labels.history,
           ),
         ],
       ),
       body: <Widget>[
-        HomeSubPage(),
+        DashBoardSubPage(),
         AppsSubPage(),
         HistorySubPage(),
       ][currentPageIndex],

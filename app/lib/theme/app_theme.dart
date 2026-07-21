@@ -122,6 +122,7 @@ class AppTheme {
       colorScheme: scheme,
       scaffoldBackgroundColor: scheme.surface,
       textTheme: textTheme,
+      iconTheme: IconThemeData(color: scheme.onSurfaceVariant, size: 24),
       cardTheme: CardThemeData(
         color: scheme.surfaceContainer,
         elevation: 0,

@@ -3,6 +3,7 @@ class AppSpacing {
   AppSpacing._();
 
   static const double baseline = 4;
+  static const double margin = 8;
   static const double marginMobile = 16;
   static const double marginTablet = 24;
   static const double gutter = 16;

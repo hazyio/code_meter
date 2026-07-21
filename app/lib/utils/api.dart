@@ -37,8 +37,7 @@ Future<Result<String, String>> validateApiKeyRemote(String apiKey) async {
   final result = await getTodaySeconds(apiKey);
   switch (result) {
     case Ok<int, String>():
-      // TODO: Handle this case.
-      throw UnimplementedError();
+      return Result<String, String>.ok("Correct");
     case Err<int, String>(error: final e):
       return Result<String, String>.err(e);
   }
@@ -69,7 +68,7 @@ Future<Result<int, String>> getTodaySeconds(String apiKey) async {
       case 404:
         return Err(translation.notFoundError);
       default:
-        return Err(t.unExpectedError);
+        return Err(t.labels.unExpectedError);
     }
   } catch (e) {
     return Err(translation.networkError(error: e));

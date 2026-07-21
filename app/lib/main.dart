@@ -1,4 +1,5 @@
 import 'package:code_meter/gen/i18n/strings.g.dart';
+import 'package:code_meter/pages/analytics/page.dart';
 import 'package:code_meter/pages/home/page.dart';
 import 'package:code_meter/pages/settings/page.dart';
 import 'package:code_meter/pages/welcome/page.dart';
@@ -22,21 +23,19 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     return DynamicColorBuilder(
       builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
         return MaterialApp(
-          
           title: 'Code Meter',
           theme: AppTheme.light(dynamicScheme: lightDynamic),
           darkTheme: AppTheme.dark(dynamicScheme: darkDynamic),
           themeMode: ThemeMode.system,
-          
           initialRoute: initialRoute,
           routes: {
-            '/': (context) => const HomePage(),
+            '/home': (context) => const HomePage(),
             '/welcome': (context) => const WelcomePage(),
             '/settings': (context) => const SettingsPage(),
+            "/analytics": (context) => const AnalyticsPage(),
           },
         );
       },

@@ -1,21 +1,43 @@
 {
   "welcomeTitle": "Earn Screen Time by Coding",
-  "welcomeDescription": "Connect your WakaTime account and decide how coding hours convert into device usage.",
-  "save": "Save",
-  "rewardPercentage": "Reward Percentage",
-  "allowRollover": "Allow Time Rollover",
-  "allowRolloverDescription": "Unused earned time carries over to the next day.",
-  "wakaApiKey": "Wakatime API Key",
-  "unExpectedError": "An  unexpected error occurred, try again later.",
-  "codingTime": "1 coding hour = $convert of device time.",
-  "openSourceOnGithub": "Open Source On Github",
-  "ok": "Ok",
-  "tryAgain": "Try Again",
-  "openWakaTimeApiPage": "Open WakaTime API page",
-  "settingsLanguage": "Language",
-  "history": "History",
-  "apps": "Apps",
-  "dashboard": "Dashboard",
+  "description": {
+    "welcome": "Connect your WakaTime account and decide how coding hours convert into device usage.",
+    "allowRollover": "Unused earned time carries over to the next day.",
+    "missingApp": "Missing app? Create issue on Github to add."
+  },
+  "labels": {
+    "appName": "Code Meter",
+    "wakaApiKey": "Wakatime API Key",
+    "history": "History",
+    "apps": "Apps",
+    "dashboard": "Dashboard",
+    "settings": "Settings",
+    "tryAgain": "Try Again",
+    "openWakaTimeApiPage": "Open WakaTime API page",
+    "ok": "Ok",
+    "unExpectedError": "An  unexpected error occurred, try again later.",
+    "codingTime": "1 coding hour = $convert of device time.",
+    "openSourceOnGithub": "Open Source On Github",
+    "language": "Language",
+    "rewardPercentage": "Reward Percentage",
+    "save": "Save",
+    "allowRollover": "Allow Time Rollover",
+    "timeRemaining": "Time Remaining",
+    "timeCount": "${hour}h ${minutes}m",
+    "earned": "Earned",
+    "used": "Used",
+    "syncWithWakaTime": "Sync with WakaTime",
+    "lastSynced": "Last synced: $datetime",
+    "topUsedApps": "Top Used Apps",
+    "gettingApps": "Getting apps...",
+    "all": "All",
+    "system": "System",
+    "installed": "Installed"
+  },
+  "settings": {
+    "saved": "Settings saved",
+    "failedToSave": "Failed to save settings $error"
+  },
   "storage": {
     "failedToGetApiKey": "Failed to retrieve saved API key",
     "failedToGetReward": "Failed to retrieve saved reward value",
@@ -40,6 +62,7 @@
       "networkError": "Network error: $error",
       "badRequest": "A bad request happened",
       "unAuthorized": "Api key is invalid."
-    }
+    },
+    "iconLabel": {}
   }
 }

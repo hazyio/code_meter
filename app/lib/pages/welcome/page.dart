@@ -1,4 +1,3 @@
-import 'package:code_meter/components/full_width.dart';
 import 'package:code_meter/components/loading_button.dart';
 import 'package:code_meter/components/locales_selector.dart';
 import 'package:code_meter/gen/i18n/strings.g.dart';
@@ -9,6 +8,7 @@ import 'package:code_meter/utils/constraints.dart';
 import 'package:code_meter/utils/from_theme.dart';
 import 'package:code_meter/utils/misc.dart';
 import 'package:code_meter/utils/result.dart';
+import 'package:code_meter/utils/settings_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -46,18 +46,39 @@ class _WelcomePageState extends State<WelcomePage> {
       setState(() => _isProcessing = true);
       final result = await validateApiKeyRemote(_wakaTimeApiController.text);
       setState(() => _isProcessing = false);
-      if (!mounted) return;
       switch (result) {
         case Ok():
           {
-            showSnackBar(context, "message");
+            final saveSettings = await SettingsStorage(
+              apiKey: _wakaTimeApiController.text,
+              rewardPercent: _rewardPercentage,
+              allowRollover: _rollover,
+            ).save();
+            if (!mounted) return;
+            setState(() => _isProcessing = false);
+            switch (saveSettings) {
+              case Ok():
+                {
+                  await Navigator.pushNamed(context, '/home');
+                }
+
+              case Err(error: final e):
+                {
+                  showSnackBar(
+                    context,
+                    translation.settings.failedToSave(error: e),
+                    actionLabel: translation.labels.tryAgain,
+                  );
+                }
+            }
           }
-        case Err(error: final e):
+        case Err():
           {
+            if (!mounted) return;
             showSnackBar(
               context,
-              e,
-              actionLabel: translation.tryAgain,
+              translation.labels.unExpectedError,
+              actionLabel: translation.labels.tryAgain,
               onPressed: () async {
                 await _saveSettings();
               },
@@ -88,7 +109,7 @@ class _WelcomePageState extends State<WelcomePage> {
               ),
               const SizedBox(height: 30),
               Text(
-                translation.welcomeDescription,
+                translation.description.welcome,
                 style: fromTextTheme(theme).titleMedium?.copyWith(
                   color: fromColorScheme(theme).secondaryFixedDim,
                 ),
@@ -105,7 +126,7 @@ class _WelcomePageState extends State<WelcomePage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          translation.wakaApiKey,
+                          translation.labels.wakaApiKey,
                           style: fromTextTheme(theme).labelLarge,
                         ),
                         SizedBox(height: 8),
@@ -164,7 +185,7 @@ class _WelcomePageState extends State<WelcomePage> {
                                 openUrl(context, AppUrls.wakaTimeApiPage);
                               },
                               child: Text(
-                                translation.openWakaTimeApiPage,
+                                translation.labels.openWakaTimeApiPage,
                                 style: fromTextTheme(theme).bodySmall?.copyWith(
                                   color: Theme.of(context).colorScheme.primary,
                                 ),
@@ -178,7 +199,7 @@ class _WelcomePageState extends State<WelcomePage> {
                           children: [
                             Expanded(
                               child: Text(
-                                translation.rewardPercentage,
+                                translation.labels.rewardPercentage,
                                 style: fromTextTheme(theme).labelLarge,
                               ),
                             ),
@@ -225,7 +246,7 @@ class _WelcomePageState extends State<WelcomePage> {
                               const SizedBox(width: 12),
                               Expanded(
                                 child: Text(
-                                  t.codingTime(
+                                  t.labels.codingTime(
                                     convert: percentToTimeString(
                                       _rewardPercentage,
                                       3600,
@@ -255,12 +276,12 @@ class _WelcomePageState extends State<WelcomePage> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    translation.allowRollover,
+                                    translation.labels.allowRollover,
                                     style: fromTextTheme(theme).titleMedium,
                                   ),
                                   const SizedBox(height: 5),
                                   Text(
-                                    translation.allowRolloverDescription,
+                                    translation.description.allowRollover,
                                     style: fromTextTheme(theme).bodySmall,
                                   ),
                                 ],
@@ -291,7 +312,7 @@ class _WelcomePageState extends State<WelcomePage> {
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Text(translation.save),
+                              Text(translation.labels.save),
                               SizedBox(width: 8),
                               Icon(Icons.arrow_forward),
                             ],
@@ -308,7 +329,7 @@ class _WelcomePageState extends State<WelcomePage> {
                   openUrl(context, AppUrls.githubRepo);
                 },
                 child: Text(
-                  translation.openSourceOnGithub,
+                  translation.labels.openSourceOnGithub,
                   style: fromTextTheme(theme).bodySmall?.copyWith(
                     color: Theme.of(context).colorScheme.primary,
                   ),

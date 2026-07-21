@@ -12,7 +12,7 @@ void showSnackBar(
   int duration = 4,
 }) {
   if (actionLabel == "") {
-    actionLabel = t.ok;
+    actionLabel = t.labels.ok;
   }
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(

@@ -8,7 +8,7 @@ class LanguageSelector extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       contentPadding: const EdgeInsets.symmetric(horizontal: 0),
-      title: Text(t.settingsLanguage),
+      title: Text(t.labels.language),
       subtitle: Text(_displayName(LocaleSettings.currentLocale)),
       trailing: const Icon(Icons.chevron_right),
       onTap: () => _showLanguagePicker(context),
