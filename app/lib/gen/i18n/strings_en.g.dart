@@ -64,6 +64,9 @@ class Translations$description$en {
 
 	/// en: 'Unused earned time carries over to the next day.'
 	String get allowRollover => 'Unused earned time carries over to the next day.';
+
+	/// en: 'Missing app? Create issue on Github to add.'
+	String get reportMissingApp => 'Missing app? Create issue on Github to add.';
 }
 
 // Path: labels
@@ -154,6 +157,12 @@ class Translations$labels$en {
 
 	/// en: 'Installed'
 	String get installed => 'Installed';
+
+	/// en: 'Allowed'
+	String get allowed => 'Allowed';
+
+	/// en: 'Not Allowed'
+	String get notAllowed => 'Not Allowed';
 }
 
 // Path: settings
@@ -274,6 +283,7 @@ extension on Translations {
 			'welcomeTitle' => 'Earn Screen Time by Coding',
 			'description.welcome' => 'Connect your WakaTime account and decide how coding hours convert into device usage.',
 			'description.allowRollover' => 'Unused earned time carries over to the next day.',
+			'description.reportMissingApp' => 'Missing app? Create issue on Github to add.',
 			'labels.appName' => 'Code Meter',
 			'labels.wakaApiKey' => 'Wakatime API Key',
 			'labels.history' => 'History',
@@ -301,6 +311,8 @@ extension on Translations {
 			'labels.all' => 'All',
 			'labels.system' => 'System',
 			'labels.installed' => 'Installed',
+			'labels.allowed' => 'Allowed',
+			'labels.notAllowed' => 'Not Allowed',
 			'settings.saved' => 'Settings saved',
 			'settings.failedToSave' => ({required Object error}) => 'Failed to save settings ${error}',
 			'storage.failedToGetApiKey' => 'Failed to retrieve saved API key',
