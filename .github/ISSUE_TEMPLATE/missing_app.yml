@@ -6,7 +6,30 @@ body:
   - type: markdown
     attributes:
       value: |
-        Use this to report an app that should be selectable in Code Meter's **Allowed Apps** list but isn't showing up — for example, a phone dialer, messaging app, or other app you rely on daily that got filtered out.
+        Code Meter's essential-apps list lives at
+        [`data/essential_apps.txt`](https://github.com/hazyio/code_meter/blob/main/data/essential_apps.txt)
+        in this repo, one app per line, in the format:
+
+        ```
+        appid,link
+        ```
+
+        For example:
+
+        ```
+        com.google.android.apps.maps,https://play.google.com/store/apps/details?id=com.google.android.apps.maps
+        ```
+
+        **The fastest way to get an app added is to edit the file yourself and open a pull
+        request** — GitHub will fork the repo and start the PR for you automatically:
+
+        👉 [**Edit `essential_apps.txt` and open a PR**](https://github.com/hazyio/code_meter/edit/main/data/essential_apps.txt)
+
+        Just add your line(s) in the same `appid,link` format, then submit — no need to clone
+        anything locally.
+
+        If you'd rather not open a PR yourself, that's totally fine — fill out the form below
+        instead and it'll get added for you.
 
   - type: textarea
     id: apps

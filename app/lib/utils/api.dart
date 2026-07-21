@@ -1,9 +1,11 @@
 import 'dart:convert';
+import 'dart:developer' as developer;
 
 // import 'package:code_meter/i18n/app_localizations.dart';
 import 'package:code_meter/gen/i18n/strings.g.dart';
 import 'package:code_meter/utils/constraints.dart';
 import 'package:code_meter/utils/result.dart';
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
 Result<String, String> validateApiKeyLocal(
@@ -73,4 +75,35 @@ Future<Result<int, String>> getTodaySeconds(String apiKey) async {
   } catch (e) {
     return Err(translation.networkError(error: e));
   }
+}
+
+Future<String?> fetchEssentialApps() async {
+  const sources = [
+    'https://cdn.statically.io/gh/hazyio/code_meter/main/data/essential_apps.txt',
+    'https://hazyio.github.io/code_meter/essential_apps.txt',
+    'https://raw.githubusercontent.com/hazyio/code_meter/main/data/essential_apps.txt',
+  ];
+  for (final url in sources) {
+    try {
+      if (kDebugMode) {
+        developer.log('Fetching from $url');
+      }
+      final response = await http
+          .get(Uri.parse(url))
+          .timeout(const Duration(seconds: 8));
+
+      if (response.statusCode == 200) return response.body;
+    } catch (e) {
+      if (kDebugMode) {
+        developer.log(
+          'url $url failed',
+          name: 'CodeMeter.fetchEssentialApps',
+          error: e,
+        );
+      }
+
+      continue; // try the next source
+    }
+  }
+  return null;
 }

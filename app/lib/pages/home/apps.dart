@@ -1,5 +1,9 @@
+import 'package:code_meter/components/padded_card.dart';
 import 'package:code_meter/gen/i18n/strings.g.dart';
 import 'package:code_meter/theme/app_dimens.dart';
+import 'package:code_meter/utils/constraints.dart';
+import 'package:code_meter/utils/from_theme.dart';
+import 'package:code_meter/utils/misc.dart';
 import 'package:flutter/material.dart';
 import 'package:installed_apps/app_info.dart';
 import 'package:installed_apps/installed_apps.dart';
@@ -11,13 +15,17 @@ class AppsSubPage extends StatefulWidget {
   State<AppsSubPage> createState() => _AppsSubPageState();
 }
 
-enum AppType { installed, system, all }
+enum AppType { allowed, notAllowed, all }
 
 class _AppsSubPageState extends State<AppsSubPage> {
   bool _gettingApps = true;
   List<AppInfo> _cachedAppsList = [];
   List<AppInfo> _sortedAppsList = [];
   AppType _sortAppBy = AppType.all;
+  List<String> _allowedApps = [
+    "com.google.android.apps.maps",
+    "com.hazyio.code_meter",
+  ];
 
   @override
   void initState() {
@@ -42,6 +50,7 @@ class _AppsSubPageState extends State<AppsSubPage> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     final translation = t;
     if (_gettingApps) {
       return SizedBox.expand(
@@ -72,14 +81,14 @@ class _AppsSubPageState extends State<AppsSubPage> {
                   icon: Icon(Icons.widgets, size: 14),
                 ),
                 ButtonSegment<AppType>(
-                  value: AppType.system,
-                  label: Text(translation.labels.system),
-                  icon: Icon(Icons.computer, size: 14),
+                  value: AppType.allowed,
+                  label: Text(translation.labels.allowed),
+                  icon: Icon(Icons.block, size: 14),
                 ),
                 ButtonSegment<AppType>(
-                  value: AppType.installed,
-                  label: Text(translation.labels.installed),
-                  icon: Icon(Icons.download, size: 14),
+                  value: AppType.notAllowed,
+                  label: Text(translation.labels.notAllowed),
+                  icon: Icon(Icons.check_circle, size: 14),
                 ),
               ],
               selected: <AppType>{_sortAppBy},
@@ -88,15 +97,20 @@ class _AppsSubPageState extends State<AppsSubPage> {
                   _sortAppBy = newSelection.first;
                   switch (_sortAppBy) {
                     case AppType.all:
+                      _sortedAppsList = _cachedAppsList;
                       break;
-                    case AppType.system:
+                    case AppType.notAllowed:
                       _sortedAppsList = _cachedAppsList
-                          .where((app) => app.isSystemApp)
+                          .where(
+                            (app) => !_allowedApps.contains(app.packageName),
+                          )
                           .toList();
                       break;
-                    case AppType.installed:
+                    case AppType.allowed:
                       _sortedAppsList = _cachedAppsList
-                          .where((app) => !app.isSystemApp)
+                          .where(
+                            (app) => _allowedApps.contains(app.packageName),
+                          )
                           .toList();
                       break;
                   }
@@ -113,32 +127,46 @@ class _AppsSubPageState extends State<AppsSubPage> {
               itemCount: _sortedAppsList.length,
               itemBuilder: (context, index) {
                 final app = _sortedAppsList[index];
-                return Card.outlined(
-                  margin: const EdgeInsets.only(bottom: AppSpacing.gutter),
-                  child: Padding(
-                    padding: const EdgeInsets.all(AppSpacing.cardPadding),
-                    child: Row(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(AppRadius.small),
-                          child: app.icon == null
-                              ? Icon(Icons.android, size: 32)
-                              : Image.memory(app.icon!, width: 32, height: 32),
+                final allowed = _allowedApps.contains(app.packageName);
+                return PaddedCard(
+                  margin: const EdgeInsets.only(bottom: AppSpacing.baseline),
+                  child: Row(
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(AppRadius.small),
+                        child: app.icon == null
+                            ? Icon(Icons.android, size: 38)
+                            : Image.memory(app.icon!, width: 38, height: 38),
+                      ),
+                      const SizedBox(width: AppSpacing.gutter),
+                      Expanded(
+                        child: Text(
+                          app.name,
+                          style: Theme.of(context).textTheme.bodyLarge,
+                          overflow: TextOverflow.ellipsis,
                         ),
-                        const SizedBox(width: AppSpacing.gutter),
-                        Expanded(
-                          child: Text(
-                            app.name,
-                            style: Theme.of(context).textTheme.bodyLarge,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                      const SizedBox(width: AppSpacing.gutter),
+
+                      Icon(
+                        allowed ? Icons.check_circle : Icons.block,
+                        size: 18,
+                        color: allowed
+                            ? fromColorScheme(theme).onSurfaceVariant
+                            : fromColorScheme(theme).error,
+                      ),
+                    ],
                   ),
                 );
               },
             ),
+            TextButton(
+              onPressed: () {
+                openUrl(context, Constraints.newMissingAppIssueUrl);
+              },
+              child: Text(translation.description.reportMissingApp),
+            ),
+            const SizedBox(height: AppSpacing.marginTablet),
           ],
         ),
       ),

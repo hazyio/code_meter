@@ -51,7 +51,6 @@ def read_api_key_file():
 
     return key
 
-
 def main():
     parser = argparse.ArgumentParser(description="Make a request to the WakaTime API")
     parser.add_argument(

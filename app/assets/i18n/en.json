@@ -3,7 +3,7 @@
   "description": {
     "welcome": "Connect your WakaTime account and decide how coding hours convert into device usage.",
     "allowRollover": "Unused earned time carries over to the next day.",
-    "missingApp": "Missing app? Create issue on Github to add."
+    "reportMissingApp": "Missing app? Create issue on Github to add."
   },
   "labels": {
     "appName": "Code Meter",
@@ -32,7 +32,9 @@
     "gettingApps": "Getting apps...",
     "all": "All",
     "system": "System",
-    "installed": "Installed"
+    "installed": "Installed",
+    "allowed": "Allowed",
+    "notAllowed": "Not Allowed"
   },
   "settings": {
     "saved": "Settings saved",
