@@ -1,3 +1,4 @@
+import 'package:code_meter/components/info_alert.dart';
 import 'package:code_meter/components/loading_button.dart';
 import 'package:code_meter/components/locales_selector.dart';
 import 'package:code_meter/gen/i18n/strings.g.dart';
@@ -45,7 +46,6 @@ class _WelcomePageState extends State<WelcomePage> {
     if (_formKey.currentState!.validate()) {
       setState(() => _isProcessing = true);
       final result = await validateApiKeyRemote(_wakaTimeApiController.text);
-      setState(() => _isProcessing = false);
       switch (result) {
         case Ok():
           {
@@ -72,12 +72,14 @@ class _WelcomePageState extends State<WelcomePage> {
                 }
             }
           }
-        case Err():
+        case Err(error: final e):
           {
+            setState(() => _isProcessing = false);
+
             if (!mounted) return;
             showSnackBar(
               context,
-              translation.labels.unExpectedError,
+              translation.settings.failedToSave(error: e),
               actionLabel: translation.labels.tryAgain,
               onPressed: () async {
                 await _saveSettings();
@@ -225,44 +227,34 @@ class _WelcomePageState extends State<WelcomePage> {
                                 },
                         ),
                         const SizedBox(height: 15),
-
-                        Container(
-                          padding: const EdgeInsets.all(AppSpacing.gutter),
-                          decoration: BoxDecoration(
-                            color: fromColorScheme(theme).secondaryContainer,
-                            borderRadius: BorderRadius.circular(
-                              AppRadius.medium,
+                        InfoAlert(
+                          children: [
+                            Icon(
+                              Icons.info_outline,
+                              color: fromColorScheme(
+                                theme,
+                              ).onSecondaryContainer,
+                              size: 15,
                             ),
-                          ),
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.info_outline,
-                                color: fromColorScheme(
-                                  theme,
-                                ).onSecondaryContainer,
-                                size: 15,
-                              ),
-                              const SizedBox(width: 12),
-                              Expanded(
-                                child: Text(
-                                  t.labels.codingTime(
-                                    convert: percentToTimeString(
-                                      _rewardPercentage,
-                                      3600,
-                                    ),
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: Text(
+                                t.labels.codingTime(
+                                  convert: percentToTimeString(
+                                    _rewardPercentage,
+                                    3600,
                                   ),
-                                  style: fromTextTheme(theme).bodySmall
-                                      ?.copyWith(
-                                        color: fromColorScheme(
-                                          theme,
-                                        ).onSecondaryContainer,
-                                      ),
+                                ),
+                                style: fromTextTheme(theme).bodySmall?.copyWith(
+                                  color: fromColorScheme(
+                                    theme,
+                                  ).onSecondaryContainer,
                                 ),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
+
                         const SizedBox(height: 30),
                         Divider(height: 20),
                         const SizedBox(height: 15),

@@ -5,7 +5,8 @@
     "allowRollover": "Unused earned time carries over to the next day.",
     "reportMissingApp": "Missing app? Create issue on Github.",
     "newUpdate": "New update available! ",
-    "failedToUpdateAllowedApps": "Failed to update allowed apps, $error"
+    "failedToUpdateAllowedApps": "Failed to update allowed apps, $error",
+    "apiKeySameAsPrevious": "Api key is the same as previous one"
   },
   "labels": {
     "appName": "Code Meter",
@@ -40,7 +41,9 @@
     "download": "Download",
     "emptyList": "Empty list",
     "databaseError": "Database error: $error",
-    "unknown": "Unknown"
+    "unknown": "Unknown",
+    "wakaTimeConnection": "WakaTime Connection",
+    "editApiKey": "Edit API Key"
   },
   "errors": {
     "failedLoadAllowedList": "Failed to load allowed apps list"

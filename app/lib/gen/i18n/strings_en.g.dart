@@ -66,14 +66,17 @@ class Translations$description$en {
 	/// en: 'Unused earned time carries over to the next day.'
 	String get allowRollover => 'Unused earned time carries over to the next day.';
 
-	/// en: 'Missing app? Create issue on Github to add.'
-	String get reportMissingApp => 'Missing app? Create issue on Github to add.';
+	/// en: 'Missing app? Create issue on Github.'
+	String get reportMissingApp => 'Missing app? Create issue on Github.';
 
 	/// en: 'New update available! '
 	String get newUpdate => 'New update available! ';
 
 	/// en: 'Failed to update allowed apps, $error'
 	String failedToUpdateAllowedApps({required Object error}) => 'Failed to update allowed apps, ${error}';
+
+	/// en: 'Api key is the same as previous one'
+	String get apiKeySameAsPrevious => 'Api key is the same as previous one';
 }
 
 // Path: labels
@@ -182,6 +185,12 @@ class Translations$labels$en {
 
 	/// en: 'Unknown'
 	String get unknown => 'Unknown';
+
+	/// en: 'WakaTime Connection'
+	String get wakaTimeConnection => 'WakaTime Connection';
+
+	/// en: 'Edit API Key'
+	String get editApiKey => 'Edit API Key';
 }
 
 // Path: errors
@@ -317,9 +326,10 @@ extension on Translations {
 			'welcomeTitle' => 'Earn Screen Time by Coding',
 			'description.welcome' => 'Connect your WakaTime account and decide how coding hours convert into device usage.',
 			'description.allowRollover' => 'Unused earned time carries over to the next day.',
-			'description.reportMissingApp' => 'Missing app? Create issue on Github to add.',
+			'description.reportMissingApp' => 'Missing app? Create issue on Github.',
 			'description.newUpdate' => 'New update available! ',
 			'description.failedToUpdateAllowedApps' => ({required Object error}) => 'Failed to update allowed apps, ${error}',
+			'description.apiKeySameAsPrevious' => 'Api key is the same as previous one',
 			'labels.appName' => 'Code Meter',
 			'labels.wakaApiKey' => 'Wakatime API Key',
 			'labels.history' => 'History',
@@ -353,6 +363,8 @@ extension on Translations {
 			'labels.emptyList' => 'Empty list',
 			'labels.databaseError' => ({required Object error}) => 'Database error: ${error}',
 			'labels.unknown' => 'Unknown',
+			'labels.wakaTimeConnection' => 'WakaTime Connection',
+			'labels.editApiKey' => 'Edit API Key',
 			'errors.failedLoadAllowedList' => 'Failed to load allowed apps list',
 			'settings.saved' => 'Settings saved',
 			'settings.failedToSave' => ({required Object error}) => 'Failed to save settings ${error}',

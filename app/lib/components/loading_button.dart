@@ -10,7 +10,7 @@ class LoadingButton extends StatelessWidget {
 
   final Widget child;
   final bool isLoading;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
 
   @override
   Widget build(BuildContext context) {
