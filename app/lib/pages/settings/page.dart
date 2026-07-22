@@ -17,7 +17,7 @@ class _SettingsPageState extends State<SettingsPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Settings"),
-        actions: [IconButton(icon: Icon(Icons.home), onPressed: _goToHomePage)],
+        // actions: [IconButton(icon: Icon(Icons.home), onPressed: _goToHomePage)],
       ),
 
       body: Center(

@@ -46,6 +46,7 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 
 	late final Translations$description$en description = Translations$description$en.internal(_root);
 	late final Translations$labels$en labels = Translations$labels$en.internal(_root);
+	late final Translations$errors$en errors = Translations$errors$en.internal(_root);
 	late final Translations$settings$en settings = Translations$settings$en.internal(_root);
 	late final Translations$storage$en storage = Translations$storage$en.internal(_root);
 	late final Translations$api$en api = Translations$api$en.internal(_root);
@@ -67,6 +68,12 @@ class Translations$description$en {
 
 	/// en: 'Missing app? Create issue on Github to add.'
 	String get reportMissingApp => 'Missing app? Create issue on Github to add.';
+
+	/// en: 'New update available! '
+	String get newUpdate => 'New update available! ';
+
+	/// en: 'Failed to update allowed apps, $error'
+	String failedToUpdateAllowedApps({required Object error}) => 'Failed to update allowed apps, ${error}';
 }
 
 // Path: labels
@@ -163,6 +170,30 @@ class Translations$labels$en {
 
 	/// en: 'Not Allowed'
 	String get notAllowed => 'Not Allowed';
+
+	/// en: 'Download'
+	String get download => 'Download';
+
+	/// en: 'Empty list'
+	String get emptyList => 'Empty list';
+
+	/// en: 'Database error: $error'
+	String databaseError({required Object error}) => 'Database error: ${error}';
+
+	/// en: 'Unknown'
+	String get unknown => 'Unknown';
+}
+
+// Path: errors
+class Translations$errors$en {
+	Translations$errors$en.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Failed to load allowed apps list'
+	String get failedLoadAllowedList => 'Failed to load allowed apps list';
 }
 
 // Path: settings
@@ -270,6 +301,9 @@ class Translations$api$responses$en {
 
 	/// en: 'Api key is invalid.'
 	String get unAuthorized => 'Api key is invalid.';
+
+	/// en: 'Failed to get allowed apps'
+	String get filedToGetAllowedApps => 'Failed to get allowed apps';
 }
 
 /// The flat map containing all translations for locale <en>.
@@ -284,6 +318,8 @@ extension on Translations {
 			'description.welcome' => 'Connect your WakaTime account and decide how coding hours convert into device usage.',
 			'description.allowRollover' => 'Unused earned time carries over to the next day.',
 			'description.reportMissingApp' => 'Missing app? Create issue on Github to add.',
+			'description.newUpdate' => 'New update available! ',
+			'description.failedToUpdateAllowedApps' => ({required Object error}) => 'Failed to update allowed apps, ${error}',
 			'labels.appName' => 'Code Meter',
 			'labels.wakaApiKey' => 'Wakatime API Key',
 			'labels.history' => 'History',
@@ -313,6 +349,11 @@ extension on Translations {
 			'labels.installed' => 'Installed',
 			'labels.allowed' => 'Allowed',
 			'labels.notAllowed' => 'Not Allowed',
+			'labels.download' => 'Download',
+			'labels.emptyList' => 'Empty list',
+			'labels.databaseError' => ({required Object error}) => 'Database error: ${error}',
+			'labels.unknown' => 'Unknown',
+			'errors.failedLoadAllowedList' => 'Failed to load allowed apps list',
 			'settings.saved' => 'Settings saved',
 			'settings.failedToSave' => ({required Object error}) => 'Failed to save settings ${error}',
 			'storage.failedToGetApiKey' => 'Failed to retrieve saved API key',
@@ -333,6 +374,7 @@ extension on Translations {
 			'api.responses.networkError' => ({required Object error}) => 'Network error: ${error}',
 			'api.responses.badRequest' => 'A bad request happened',
 			'api.responses.unAuthorized' => 'Api key is invalid.',
+			'api.responses.filedToGetAllowedApps' => 'Failed to get allowed apps',
 			_ => null,
 		};
 	}

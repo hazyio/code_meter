@@ -1,18 +1,60 @@
+import 'package:code_meter/components/full_width.dart';
 import 'package:code_meter/components/loading_button.dart';
 import 'package:code_meter/components/padded_card.dart';
 import 'package:code_meter/gen/i18n/strings.g.dart';
 import 'package:code_meter/theme/app_dimens.dart';
+import 'package:code_meter/utils/constraints.dart';
 import 'package:code_meter/utils/from_theme.dart';
+import 'package:code_meter/utils/misc.dart';
 import 'package:flutter/material.dart';
 
-class DashBoardSubPage extends StatelessWidget {
-  const DashBoardSubPage({super.key});
+class DashBoardSubPage extends StatefulWidget {
+  const DashBoardSubPage({
+    super.key,
+    required this.updateAvailable,
+  });
+  final bool updateAvailable;
+
+  @override
+  State<DashBoardSubPage> createState() => _DashBoardSubPageState();
+}
+
+class _DashBoardSubPageState extends State<DashBoardSubPage> {
   final bool _syncing = false;
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final translation = t;
+    List<Widget> buildUpdateCard() {
+      if (!widget.updateAvailable) return [];
+      return [
+        FullWidth(
+          child: PaddedCard(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(AppRadius.small),
+            ),
+            padding: const EdgeInsets.all(AppSpacing.margin),
+            child: Row(
+              children: [
+                Expanded(child: Text(translation.description.newUpdate)),
+                TextButton(
+                  onPressed: () {
+                    openUrl(context, Constraints.updateUrl);
+                  },
+                  child: Text(translation.labels.download),
+                ),
+              ],
+            ),
+          ),
+        ),
+        const SizedBox(height: AppSpacing.marginMobile),
+      ];
+    }
 
     return SingleChildScrollView(
       child: Column(
@@ -54,11 +96,13 @@ class DashBoardSubPage extends StatelessWidget {
             ),
           ),
           const SizedBox(height: AppSpacing.baseline),
+
           Padding(
             padding: const .all(AppSpacing.marginMobile),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                ...buildUpdateCard(),
                 PaddedCard(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(AppRadius.small),

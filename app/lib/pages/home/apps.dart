@@ -1,15 +1,19 @@
+import 'package:code_meter/components/error_box.dart';
 import 'package:code_meter/components/padded_card.dart';
 import 'package:code_meter/gen/i18n/strings.g.dart';
 import 'package:code_meter/theme/app_dimens.dart';
 import 'package:code_meter/utils/constraints.dart';
+import 'package:code_meter/utils/database.dart';
 import 'package:code_meter/utils/from_theme.dart';
 import 'package:code_meter/utils/misc.dart';
+import 'package:code_meter/utils/result.dart';
 import 'package:flutter/material.dart';
 import 'package:installed_apps/app_info.dart';
 import 'package:installed_apps/installed_apps.dart';
 
 class AppsSubPage extends StatefulWidget {
-  const AppsSubPage({super.key});
+  AppsSubPage({super.key, required this.database});
+  DatabaseHelper database = DatabaseHelper();
 
   @override
   State<AppsSubPage> createState() => _AppsSubPageState();
@@ -22,15 +26,38 @@ class _AppsSubPageState extends State<AppsSubPage> {
   List<AppInfo> _cachedAppsList = [];
   List<AppInfo> _sortedAppsList = [];
   AppType _sortAppBy = AppType.all;
-  List<String> _allowedApps = [
-    "com.google.android.apps.maps",
-    "com.hazyio.code_meter",
-  ];
+  String? _error;
+  List<String> _allowedApps = [];
 
   @override
   void initState() {
     super.initState();
     _loadApps(); // runs exactly once, when this widget is first created
+  }
+
+  Future<void> _loadAllowedApps() async {
+    if (!_gettingApps) {
+      // set state to loading
+      setState(() {
+        _gettingApps = true;
+      });
+    }
+    try {
+      final allowedAppsList = await widget.database.getAllowedApps();
+      setState(() {
+        _allowedApps = allowedAppsList
+            .map((e) => e['app_id'].toString())
+            .toList();
+        _gettingApps = false;
+        _error = null;
+      });
+    } catch (e) {
+      printIfDebug(e);
+      setState(() {
+        _error = t.errors.failedLoadAllowedList;
+        _gettingApps = false;
+      });
+    }
   }
 
   Future<void> _loadApps() async {
@@ -40,12 +67,11 @@ class _AppsSubPageState extends State<AppsSubPage> {
       withIcon: true,
     );
     if (!mounted) return;
-
     setState(() {
       _cachedAppsList = apps;
       _sortedAppsList = apps;
-      _gettingApps = false;
     });
+    await _loadAllowedApps();
   }
 
   @override
@@ -62,6 +88,28 @@ class _AppsSubPageState extends State<AppsSubPage> {
               CircularProgressIndicator(),
               SizedBox(height: AppSpacing.gutter),
               Text(translation.labels.gettingApps),
+            ],
+          ),
+        ),
+      );
+    }
+    if (_error != null) {
+      return SizedBox.expand(
+        child: Center(
+          child: Column(
+            mainAxisSize:
+                MainAxisSize.min, // keeps content centered, not stretched
+            children: [
+              ErrorBox(
+                children: [
+                  Text(_error!, style: Theme.of(context).textTheme.bodyLarge),
+                  const SizedBox(height: AppSpacing.gutter),
+                  TextButton(
+                    onPressed: _loadAllowedApps,
+                    child: Text(translation.labels.tryAgain),
+                  ),
+                ],
+              ),
             ],
           ),
         ),
@@ -130,13 +178,16 @@ class _AppsSubPageState extends State<AppsSubPage> {
                 final allowed = _allowedApps.contains(app.packageName);
                 return PaddedCard(
                   margin: const EdgeInsets.only(bottom: AppSpacing.baseline),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(AppRadius.small),
+                  ),
                   child: Row(
                     children: [
                       ClipRRect(
                         borderRadius: BorderRadius.circular(AppRadius.small),
                         child: app.icon == null
-                            ? Icon(Icons.android, size: 38)
-                            : Image.memory(app.icon!, width: 38, height: 38),
+                            ? Icon(Icons.android, size: 36)
+                            : Image.memory(app.icon!, width: 36, height: 36),
                       ),
                       const SizedBox(width: AppSpacing.gutter),
                       Expanded(
@@ -150,7 +201,7 @@ class _AppsSubPageState extends State<AppsSubPage> {
 
                       Icon(
                         allowed ? Icons.check_circle : Icons.block,
-                        size: 18,
+                        size: 24,
                         color: allowed
                             ? fromColorScheme(theme).onSurfaceVariant
                             : fromColorScheme(theme).error,
