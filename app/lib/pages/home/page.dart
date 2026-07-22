@@ -2,6 +2,8 @@ import 'package:code_meter/gen/i18n/strings.g.dart';
 import 'package:code_meter/pages/home/apps.dart';
 import 'package:code_meter/pages/home/history.dart';
 import 'package:code_meter/pages/home/dashboard.dart';
+import 'package:code_meter/utils/database.dart';
+import 'package:code_meter/utils/misc.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -13,6 +15,29 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int currentPageIndex = 0;
+  DatabaseHelper database = DatabaseHelper();
+  bool updateAvailable = false;
+  @override
+  void initState() {
+    super.initState();
+    _doChecks();
+  }
+
+  Future<void> _doChecks() async {
+    if (await updateCheckDue(database)) {
+      final isLatest = await isLatestVersion();
+      if (isLatest != null) {
+        setState(() {
+          updateAvailable = updateAvailable;
+        });
+        await database.updateLastCheck(UpdateChecks.lastUpdate);
+      }
+    }
+    if (await updateAllowedAppListDue(database)) {
+      // silently fail, this is a background task
+      await updateAllowedAppList(database);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +47,6 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: NavigationBar(
         height: 60.0,
 
-        // labelBehavior: .onlyShowSelected,
         onDestinationSelected: (int index) {
           setState(() {
             currentPageIndex = index;
@@ -57,8 +81,8 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       body: <Widget>[
-        DashBoardSubPage(),
-        AppsSubPage(),
+        DashBoardSubPage(updateAvailable: updateAvailable),
+        AppsSubPage(database: database),
         HistorySubPage(),
       ][currentPageIndex],
     );

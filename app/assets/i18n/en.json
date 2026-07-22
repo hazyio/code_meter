@@ -3,7 +3,10 @@
   "description": {
     "welcome": "Connect your WakaTime account and decide how coding hours convert into device usage.",
     "allowRollover": "Unused earned time carries over to the next day.",
-    "reportMissingApp": "Missing app? Create issue on Github to add."
+    "reportMissingApp": "Missing app? Create issue on Github.",
+    "newUpdate": "New update available! ",
+    "failedToUpdateAllowedApps": "Failed to update allowed apps, $error",
+    "apiKeySameAsPrevious": "Api key is the same as previous one"
   },
   "labels": {
     "appName": "Code Meter",
@@ -34,7 +37,16 @@
     "system": "System",
     "installed": "Installed",
     "allowed": "Allowed",
-    "notAllowed": "Not Allowed"
+    "notAllowed": "Not Allowed",
+    "download": "Download",
+    "emptyList": "Empty list",
+    "databaseError": "Database error: $error",
+    "unknown": "Unknown",
+    "wakaTimeConnection": "WakaTime Connection",
+    "editApiKey": "Edit API Key"
+  },
+  "errors": {
+    "failedLoadAllowedList": "Failed to load allowed apps list"
   },
   "settings": {
     "saved": "Settings saved",
@@ -63,7 +75,8 @@
       "notFoundError": "404? something isn't right, update app or create a issue.",
       "networkError": "Network error: $error",
       "badRequest": "A bad request happened",
-      "unAuthorized": "Api key is invalid."
+      "unAuthorized": "Api key is invalid.",
+      "filedToGetAllowedApps": "Failed to get allowed apps"
     },
     "iconLabel": {}
   }
