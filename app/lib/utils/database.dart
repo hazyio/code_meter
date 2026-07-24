@@ -1,8 +1,17 @@
+import 'dart:developer' as developer;
+
 import 'package:code_meter/utils/misc.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:path/path.dart';
 
 class DatabaseHelper {
   static Database? _db;
+  Future<String> get dbPath async {
+    final dbPath = await getDatabasesPath();
+    final path = join(dbPath, "code_meter.hazyio.com.db");
+    return path;
+  }
+
   Future<Database> get database async {
     _db ??= await _initDB();
     return _db!;
@@ -13,7 +22,7 @@ class DatabaseHelper {
       '''
       CREATE TABLE allowed_apps (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        app_id TEXT NOT NULL,
+        app_id TEXT NOT NULL UNIQUE,
         app_url TEXT NOT NULL
       );
       ''',
@@ -38,7 +47,7 @@ class DatabaseHelper {
 
   Future<Database> _initDB() async {
     return openDatabase(
-      "code_meter.hazyio.com.db",
+      await dbPath,
       version: 1,
       onCreate: (db, version) async {
         for (final sql in _createTables()) {
@@ -46,6 +55,17 @@ class DatabaseHelper {
         }
       },
     );
+  }
+
+  Future<bool> clearDatabase() async {
+    printIfDebug("Clearing database");
+    try {
+      await deleteDatabase(await dbPath);
+      return true;
+    } catch (e) {
+      printIfDebug(e);
+      return false;
+    }
   }
 
   Future<bool> insertAllowedApps(List<Map<String, dynamic>> rows) async {
@@ -106,6 +126,12 @@ class DatabaseHelper {
     }
 
     return null;
+  }
+
+  Future<int?> countAllowedApps() async {
+    final db = await database;
+    final result = await db.query('allowed_apps', columns: ['id']);
+    return result.length;
   }
 }
 

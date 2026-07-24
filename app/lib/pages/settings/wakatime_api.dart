@@ -160,10 +160,25 @@ class _WakatimeApiPageState extends State<WakatimeApi> {
           const SizedBox(height: AppSpacing.marginTablet),
           FullWidth(
             child: _canEdit
-                ? LoadingButton(
-                    isLoading: _isProcessing,
-                    onPressed: _saveSettings,
-                    child: Text(translation.labels.save),
+                ? Row(
+                    children: [
+                      OutlinedButton(
+                        onPressed: () {
+                          setState(() {
+                            _canEdit = false;
+                          });
+                        },
+                        child: Text(translation.labels.cancel),
+                      ),
+                      const SizedBox(width: AppSpacing.gutter),
+                      Expanded(
+                        child: LoadingButton(
+                          isLoading: _isProcessing,
+                          onPressed: _saveSettings,
+                          child: Text(translation.labels.save),
+                        ),
+                      ),
+                    ],
                   )
                 : OutlinedButton(
                     onPressed: () {

@@ -13,6 +13,23 @@ class SettingsRepository {
   static const _apiKeyStorageKey = 'wakatime_api_key';
 
   final _secureStorage = const FlutterSecureStorage();
+  Future<bool> clearAll() async {
+    try {
+      await _secureStorage.deleteAll();
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.clear();
+      return true;
+    } catch (e) {
+      if (kDebugMode) {
+        developer.log(
+          'Failed to clear all data',
+          name: 'CodeMeter.SettingsRepository',
+          error: e,
+        );
+      }
+      return false;
+    }
+  }
 
   Future<bool> saveApiKey(String apiKey) async {
     try {

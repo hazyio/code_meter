@@ -77,6 +77,24 @@ class Translations$description$en {
 
 	/// en: 'Api key is the same as previous one'
 	String get apiKeySameAsPrevious => 'Api key is the same as previous one';
+
+	/// en: 'App is up to date'
+	String get appIsUpToDate => 'App is up to date';
+
+	/// en: '$version Last checked $datetime days ago.'
+	String appUpdateLastChecked({required Object version, required Object datetime}) => '${version} Last checked ${datetime} days ago.';
+
+	/// en: '$prefix Last updated $datetime days ago.'
+	String lastUpdated({required Object prefix, required Object datetime}) => '${prefix} Last updated ${datetime} days ago.';
+
+	/// en: 'Successfully updated allowed apps'
+	String get allowedAppListUpdateSuccess => 'Successfully updated allowed apps';
+
+	/// en: 'Are you sure you want to clear all data?'
+	String get clearAllData => 'Are you sure you want to clear all data?';
+
+	/// en: 'Failed to clear data'
+	String get failedToClearData => 'Failed to clear data';
 }
 
 // Path: labels
@@ -89,6 +107,12 @@ class Translations$labels$en {
 
 	/// en: 'Code Meter'
 	String get appName => 'Code Meter';
+
+	/// en: '$count items'
+	String itemsCount({required Object count}) => '${count} items';
+
+	/// en: 'About'
+	String get about => 'About';
 
 	/// en: 'Wakatime API Key'
 	String get wakaApiKey => 'Wakatime API Key';
@@ -191,6 +215,36 @@ class Translations$labels$en {
 
 	/// en: 'Edit API Key'
 	String get editApiKey => 'Edit API Key';
+
+	/// en: 'Update'
+	String get update => 'Update';
+
+	/// en: 'Check Update'
+	String get checkUpdate => 'Check Update';
+
+	/// en: 'App Update'
+	String get appUpdate => 'App Update';
+
+	/// en: 'Allowed App List Update'
+	String get allowedAppListUpdate => 'Allowed App List Update';
+
+	/// en: 'Cancel'
+	String get cancel => 'Cancel';
+
+	/// en: 'Update available'
+	String get updateAvailable => 'Update available';
+
+	/// en: 'See list'
+	String get seeList => 'See list';
+
+	/// en: 'Yes'
+	String get yes => 'Yes';
+
+	/// en: 'No'
+	String get no => 'No';
+
+	/// en: 'Clear App Data'
+	String get clearAppData => 'Clear App Data';
 }
 
 // Path: errors
@@ -200,6 +254,12 @@ class Translations$errors$en {
 	final Translations _root; // ignore: unused_field
 
 	// Translations
+
+	/// en: '$error while checking for update'
+	String errorWhileCheckingUpdate({required Object error}) => '${error} while checking for update';
+
+	/// en: 'Unknown error'
+	String get unknown => 'Unknown error';
 
 	/// en: 'Failed to load allowed apps list'
 	String get failedLoadAllowedList => 'Failed to load allowed apps list';
@@ -330,7 +390,15 @@ extension on Translations {
 			'description.newUpdate' => 'New update available! ',
 			'description.failedToUpdateAllowedApps' => ({required Object error}) => 'Failed to update allowed apps, ${error}',
 			'description.apiKeySameAsPrevious' => 'Api key is the same as previous one',
+			'description.appIsUpToDate' => 'App is up to date',
+			'description.appUpdateLastChecked' => ({required Object version, required Object datetime}) => '${version} Last checked ${datetime} days ago.',
+			'description.lastUpdated' => ({required Object prefix, required Object datetime}) => '${prefix} Last updated ${datetime} days ago.',
+			'description.allowedAppListUpdateSuccess' => 'Successfully updated allowed apps',
+			'description.clearAllData' => 'Are you sure you want to clear all data?',
+			'description.failedToClearData' => 'Failed to clear data',
 			'labels.appName' => 'Code Meter',
+			'labels.itemsCount' => ({required Object count}) => '${count} items',
+			'labels.about' => 'About',
 			'labels.wakaApiKey' => 'Wakatime API Key',
 			'labels.history' => 'History',
 			'labels.apps' => 'Apps',
@@ -365,6 +433,18 @@ extension on Translations {
 			'labels.unknown' => 'Unknown',
 			'labels.wakaTimeConnection' => 'WakaTime Connection',
 			'labels.editApiKey' => 'Edit API Key',
+			'labels.update' => 'Update',
+			'labels.checkUpdate' => 'Check Update',
+			'labels.appUpdate' => 'App Update',
+			'labels.allowedAppListUpdate' => 'Allowed App List Update',
+			'labels.cancel' => 'Cancel',
+			'labels.updateAvailable' => 'Update available',
+			'labels.seeList' => 'See list',
+			'labels.yes' => 'Yes',
+			'labels.no' => 'No',
+			'labels.clearAppData' => 'Clear App Data',
+			'errors.errorWhileCheckingUpdate' => ({required Object error}) => '${error} while checking for update',
+			'errors.unknown' => 'Unknown error',
 			'errors.failedLoadAllowedList' => 'Failed to load allowed apps list',
 			'settings.saved' => 'Settings saved',
 			'settings.failedToSave' => ({required Object error}) => 'Failed to save settings ${error}',

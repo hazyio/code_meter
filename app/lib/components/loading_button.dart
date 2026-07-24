@@ -6,17 +6,20 @@ class LoadingButton extends StatelessWidget {
     required this.child,
     required this.isLoading,
     required this.onPressed,
+    this.style,
   });
 
   final Widget child;
   final bool isLoading;
   final VoidCallback? onPressed;
+  final ButtonStyle? style;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
       child: FilledButton(
+        style: style,
         onPressed: isLoading ? null : onPressed,
         child: isLoading
             ? const SizedBox(

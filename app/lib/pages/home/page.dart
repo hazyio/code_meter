@@ -33,10 +33,11 @@ class _HomePageState extends State<HomePage> {
         await database.updateLastCheck(UpdateChecks.lastUpdate);
       }
     }
-    if (await updateAllowedAppListDue(database)) {
-      // silently fail, this is a background task
-      await updateAllowedAppList(database);
-    }
+    // remove, this could make internet bill go up.
+    // if (await updateAllowedAppListDue(database)) {
+    //   // silently fail, this is a background task
+    //   await updateAllowedAppList(database);
+    // }
   }
 
   @override

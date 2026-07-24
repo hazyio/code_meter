@@ -9,10 +9,7 @@ import 'package:code_meter/utils/misc.dart';
 import 'package:flutter/material.dart';
 
 class DashBoardSubPage extends StatefulWidget {
-  const DashBoardSubPage({
-    super.key,
-    required this.updateAvailable,
-  });
+  const DashBoardSubPage({super.key, required this.updateAvailable});
   final bool updateAvailable;
 
   @override
@@ -75,7 +72,7 @@ class _DashBoardSubPageState extends State<DashBoardSubPage> {
                 Expanded(child: SizedBox.fromSize()),
                 IconButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, '/analytics');
+                    openRoute(context, Routes.analytics);
                   },
                   icon: Icon(
                     Icons.analytics,
@@ -85,7 +82,7 @@ class _DashBoardSubPageState extends State<DashBoardSubPage> {
 
                 IconButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, '/settings');
+                    openRoute(context, Routes.settings);
                   },
                   icon: Icon(
                     Icons.settings,
