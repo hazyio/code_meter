@@ -6,10 +6,18 @@
     "reportMissingApp": "Missing app? Create issue on Github.",
     "newUpdate": "New update available! ",
     "failedToUpdateAllowedApps": "Failed to update allowed apps, $error",
-    "apiKeySameAsPrevious": "Api key is the same as previous one"
+    "apiKeySameAsPrevious": "Api key is the same as previous one",
+    "appIsUpToDate": "App is up to date",
+    "appUpdateLastChecked": "$version Last checked $datetime days ago.",
+    "lastUpdated": "$prefix Last updated $datetime days ago.",
+    "allowedAppListUpdateSuccess": "Successfully updated allowed apps",
+    "clearAllData": "Are you sure you want to clear all data?",
+    "failedToClearData": "Failed to clear data"
   },
   "labels": {
     "appName": "Code Meter",
+    "itemsCount": "$count items",
+    "about": "About",
     "wakaApiKey": "Wakatime API Key",
     "history": "History",
     "apps": "Apps",
@@ -43,10 +51,23 @@
     "databaseError": "Database error: $error",
     "unknown": "Unknown",
     "wakaTimeConnection": "WakaTime Connection",
-    "editApiKey": "Edit API Key"
+    "editApiKey": "Edit API Key",
+    "update": "Update",
+    "checkUpdate": "Check Update",
+    "appUpdate": "App Update",
+    "allowedAppListUpdate": "Allowed App List Update",
+    "cancel": "Cancel",
+    "updateAvailable": "Update available",
+    "seeList": "See list",
+    "yes": "Yes",
+    "no": "No",
+    "clearAppData": "Clear App Data"
   },
   "errors": {
-    "failedLoadAllowedList": "Failed to load allowed apps list"
+    "errorWhileCheckingUpdate": "$error while checking for update",
+    "unknown": "Unknown error",
+    "failedLoadAllowedList": "Failed to load allowed apps list",
+    "failedToGetAllowedList": "Failed to get allowed apps list"
   },
   "settings": {
     "saved": "Settings saved",

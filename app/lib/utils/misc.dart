@@ -1,3 +1,5 @@
+import 'dart:developer' as developer;
+
 import 'package:code_meter/gen/i18n/strings.g.dart';
 import 'package:code_meter/utils/api.dart';
 import 'package:code_meter/utils/constraints.dart';
@@ -9,9 +11,35 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+enum Routes { home, analytics, settings, welcome }
+
+Future<void> openRoute(BuildContext context, final Routes route) async {
+  switch (route) {
+    case Routes.welcome:
+      {
+        await Navigator.pushNamed(context, '/welcome');
+      }
+    case Routes.home:
+      {
+        await Navigator.pushNamed(context, '/home');
+      }
+      break;
+    case Routes.analytics:
+      {
+        await Navigator.pushNamed(context, '/analytics');
+      }
+      break;
+    case Routes.settings:
+      {
+        await Navigator.pushNamed(context, '/settings');
+      }
+      break;
+  }
+}
+
 void printIfDebug(Object? object) {
   if (kDebugMode) {
-    print(object);
+    developer.log('', name: 'CodeMeter', error: object);
   }
 }
 
@@ -140,6 +168,7 @@ Future<Result<String, String>> updateAllowedAppList(
 
 /// Returns negative if v1 < v2, positive if v1 > v2, zero if equal.
 int compareVersions(String v1, String v2) {
+  printIfDebug("comparing versions $v1 and $v2");
   final parts1 = v1.split('.').map(int.parse).toList();
   final parts2 = v2.split('.').map(int.parse).toList();
 
@@ -148,6 +177,7 @@ int compareVersions(String v1, String v2) {
     final p2 = i < parts2.length ? parts2[i] : 0;
     if (p1 != p2) return p1 - p2;
   }
+  printIfDebug("Versions are equal");
   return 0;
 }
 
@@ -156,5 +186,5 @@ Future<bool?> isLatestVersion() async {
   if (remoteVersion == null) {
     return null;
   }
-  return compareVersions(Constraints.appVersion, remoteVersion) > 0;
+  return compareVersions(Constraints.appVersion, remoteVersion) == 0;
 }

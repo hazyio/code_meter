@@ -6,6 +6,7 @@ import 'package:code_meter/theme/app_dimens.dart';
 import 'package:code_meter/utils/api.dart';
 import 'package:code_meter/utils/app_urls.dart';
 import 'package:code_meter/utils/constraints.dart';
+import 'package:code_meter/utils/database.dart';
 import 'package:code_meter/utils/from_theme.dart';
 import 'package:code_meter/utils/misc.dart';
 import 'package:code_meter/utils/result.dart';
@@ -45,45 +46,64 @@ class _WelcomePageState extends State<WelcomePage> {
   Future<void> _saveSettings() async {
     if (_formKey.currentState!.validate()) {
       setState(() => _isProcessing = true);
-      final result = await validateApiKeyRemote(_wakaTimeApiController.text);
-      switch (result) {
+      final saveAllowed = await updateAllowedAppList(DatabaseHelper());
+      switch (saveAllowed) {
         case Ok():
           {
-            final saveSettings = await SettingsStorage(
-              apiKey: _wakaTimeApiController.text,
-              rewardPercent: _rewardPercentage,
-              allowRollover: _rollover,
-            ).save();
-            if (!mounted) return;
-            setState(() => _isProcessing = false);
-            switch (saveSettings) {
+            final result = await validateApiKeyRemote(
+              _wakaTimeApiController.text,
+            );
+            switch (result) {
               case Ok():
                 {
-                  await Navigator.pushNamed(context, '/home');
-                }
+                  final saveSettings = await SettingsStorage(
+                    apiKey: _wakaTimeApiController.text,
+                    rewardPercent: _rewardPercentage,
+                    allowRollover: _rollover,
+                  ).save();
+                  if (!mounted) return;
+                  setState(() => _isProcessing = false);
+                  switch (saveSettings) {
+                    case Ok():
+                      {
+                        await openRoute(context, Routes.home);
+                      }
 
+                    case Err(error: final e):
+                      {
+                        showSnackBar(
+                          context,
+                          translation.settings.failedToSave(error: e),
+                          actionLabel: translation.labels.tryAgain,
+                        );
+                      }
+                  }
+                }
               case Err(error: final e):
                 {
+                  setState(() => _isProcessing = false);
+
+                  if (!mounted) return;
                   showSnackBar(
                     context,
                     translation.settings.failedToSave(error: e),
                     actionLabel: translation.labels.tryAgain,
+                    onPressed: () async {
+                      await _saveSettings();
+                    },
                   );
                 }
             }
           }
+          break;
         case Err(error: final e):
           {
             setState(() => _isProcessing = false);
-
-            if (!mounted) return;
             showSnackBar(
               context,
               translation.settings.failedToSave(error: e),
               actionLabel: translation.labels.tryAgain,
-              onPressed: () async {
-                await _saveSettings();
-              },
+              onPressed: _saveSettings,
             );
           }
       }

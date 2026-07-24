@@ -1,8 +1,24 @@
+import 'dart:developer' as developer;
+
 import 'package:code_meter/utils/misc.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:path/path.dart';
+
+class AllowedAppInfo {
+  const AllowedAppInfo(this.name, this.id, this.url);
+  final String name;
+  final String id;
+  final String url;
+}
 
 class DatabaseHelper {
   static Database? _db;
+  Future<String> get dbPath async {
+    final dbPath = await getDatabasesPath();
+    final path = join(dbPath, "code_meter.hazyio.com.db");
+    return path;
+  }
+
   Future<Database> get database async {
     _db ??= await _initDB();
     return _db!;
@@ -13,7 +29,8 @@ class DatabaseHelper {
       '''
       CREATE TABLE allowed_apps (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        app_id TEXT NOT NULL,
+        app_name TEXT NOT NULL,
+        app_id TEXT NOT NULL UNIQUE,
         app_url TEXT NOT NULL
       );
       ''',
@@ -38,7 +55,7 @@ class DatabaseHelper {
 
   Future<Database> _initDB() async {
     return openDatabase(
-      "code_meter.hazyio.com.db",
+      await dbPath,
       version: 1,
       onCreate: (db, version) async {
         for (final sql in _createTables()) {
@@ -48,17 +65,28 @@ class DatabaseHelper {
     );
   }
 
-  Future<bool> insertAllowedApps(List<Map<String, dynamic>> rows) async {
+  Future<bool> clearDatabase() async {
+    printIfDebug("Clearing database");
+    try {
+      await deleteDatabase(await dbPath);
+      return true;
+    } catch (e) {
+      printIfDebug(e);
+      return false;
+    }
+  }
+
+  Future<bool> insertAllowedApps(List<AllowedAppInfo> rows) async {
     try {
       final db = await database;
       await db.transaction((txn) async {
         var batch = txn.batch();
         for (final row in rows) {
-          batch.insert(
-            'allowed_apps',
-            row,
-            conflictAlgorithm: ConflictAlgorithm.ignore,
-          );
+          batch.insert('allowed_apps', {
+            'app_name': row.name,
+            'app_id': row.id,
+            'app_url': row.url,
+          }, conflictAlgorithm: ConflictAlgorithm.ignore);
         }
         await batch.commit();
       });
@@ -106,6 +134,12 @@ class DatabaseHelper {
     }
 
     return null;
+  }
+
+  Future<int?> countAllowedApps() async {
+    final db = await database;
+    final result = await db.query('allowed_apps', columns: ['id']);
+    return result.length;
   }
 }
 
