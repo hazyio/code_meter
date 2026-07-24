@@ -263,6 +263,9 @@ class Translations$errors$en {
 
 	/// en: 'Failed to load allowed apps list'
 	String get failedLoadAllowedList => 'Failed to load allowed apps list';
+
+	/// en: 'Failed to get allowed apps list'
+	String get failedToGetAllowedList => 'Failed to get allowed apps list';
 }
 
 // Path: settings
@@ -446,6 +449,7 @@ extension on Translations {
 			'errors.errorWhileCheckingUpdate' => ({required Object error}) => '${error} while checking for update',
 			'errors.unknown' => 'Unknown error',
 			'errors.failedLoadAllowedList' => 'Failed to load allowed apps list',
+			'errors.failedToGetAllowedList' => 'Failed to get allowed apps list',
 			'settings.saved' => 'Settings saved',
 			'settings.failedToSave' => ({required Object error}) => 'Failed to save settings ${error}',
 			'storage.failedToGetApiKey' => 'Failed to retrieve saved API key',

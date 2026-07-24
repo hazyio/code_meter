@@ -4,6 +4,13 @@ import 'package:code_meter/utils/misc.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
+class AllowedAppInfo {
+  const AllowedAppInfo(this.name, this.id, this.url);
+  final String name;
+  final String id;
+  final String url;
+}
+
 class DatabaseHelper {
   static Database? _db;
   Future<String> get dbPath async {
@@ -22,6 +29,7 @@ class DatabaseHelper {
       '''
       CREATE TABLE allowed_apps (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
+        app_name TEXT NOT NULL,
         app_id TEXT NOT NULL UNIQUE,
         app_url TEXT NOT NULL
       );
@@ -68,17 +76,17 @@ class DatabaseHelper {
     }
   }
 
-  Future<bool> insertAllowedApps(List<Map<String, dynamic>> rows) async {
+  Future<bool> insertAllowedApps(List<AllowedAppInfo> rows) async {
     try {
       final db = await database;
       await db.transaction((txn) async {
         var batch = txn.batch();
         for (final row in rows) {
-          batch.insert(
-            'allowed_apps',
-            row,
-            conflictAlgorithm: ConflictAlgorithm.ignore,
-          );
+          batch.insert('allowed_apps', {
+            'app_name': row.name,
+            'app_id': row.id,
+            'app_url': row.url,
+          }, conflictAlgorithm: ConflictAlgorithm.ignore);
         }
         await batch.commit();
       });

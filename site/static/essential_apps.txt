@@ -1,2 +1,2 @@
-com.google.android.apps.maps,https://play.google.com/store/apps/details?id=com.google.android.apps.maps
-com.hazyio.code_meter,https://codemeter.hazyio.com
+Google Maps,com.google.android.apps.maps,https://play.google.com/store/apps/details?id=com.google.android.apps.maps
+Code Meter,com.hazyio.code_meter,https://codemeter.hazyio.com

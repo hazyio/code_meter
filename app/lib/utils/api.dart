@@ -4,6 +4,7 @@ import 'dart:developer' as developer;
 // import 'package:code_meter/i18n/app_localizations.dart';
 import 'package:code_meter/gen/i18n/strings.g.dart';
 import 'package:code_meter/utils/constraints.dart';
+import 'package:code_meter/utils/database.dart';
 import 'package:code_meter/utils/result.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
@@ -76,7 +77,7 @@ Future<Result<int, String>> getTodaySeconds(String apiKey) async {
   }
 }
 
-Future<Result<List<Map<String, String>>, String>> getAllowedApps() async {
+Future<Result<List<AllowedAppInfo>, String>> getAllowedApps() async {
   final translation = t.api;
   final data = await fetchEssentialApps();
   if (data == null) {
@@ -89,11 +90,8 @@ Future<Result<List<Map<String, String>>, String>> getAllowedApps() async {
         .where((line) => line.isNotEmpty)
         .map((line) {
           final parts = line.split(',');
-          if (parts.length < 2) return <String, String>{};
-
-          return <String, String>{'app_id': parts[0], 'app_url': parts[1]};
+          return AllowedAppInfo(parts[0], parts[1], parts[2]);
         })
-        .where((item) => item.isNotEmpty)
         .toList(),
   );
 }

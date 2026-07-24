@@ -98,13 +98,13 @@ filtered out unintentionally. Essential apps are tracked in
 [`site/static/essential_apps.txt`](site/static/essential_apps.txt), one per line, in the format:
 
 ```
-appid,link
+appname,appid,link
 ```
 
 For example:
 
 ```
-com.google.android.apps.maps,https://play.google.com/store/apps/details?id=com.google.android.apps.maps
+Google Maps,com.google.android.apps.maps,https://play.google.com/store/apps/details?id=com.google.android.apps.maps
 ```
 
 Once deployed, the file is also served directly from the project's own site at

@@ -33,7 +33,7 @@ class _SettingsPageState extends State<SettingsPage> {
   bool _checkingAllowedAppListUpdate = false;
   String _updateLastChecked = DateTime.now().toIso8601String();
   String _allowedAppListLastChecked = DateTime.now().toIso8601String();
-  DatabaseHelper database = DatabaseHelper();
+  final DatabaseHelper _database = DatabaseHelper();
   int _allowedAppCount = 0;
   bool _clearingData = false;
 
@@ -54,21 +54,21 @@ class _SettingsPageState extends State<SettingsPage> {
         });
       }
     });
-    database.getLastCheck(UpdateChecks.lastUpdate).then((value) {
+    _database.getLastCheck(UpdateChecks.lastUpdate).then((value) {
       if (value != null) {
         setState(() {
           _updateLastChecked = value;
         });
       }
     });
-    database.getLastCheck(UpdateChecks.allowedApps).then((value) {
+    _database.getLastCheck(UpdateChecks.allowedApps).then((value) {
       if (value != null) {
         setState(() {
           _allowedAppListLastChecked = value;
         });
       }
     });
-    database.countAllowedApps().then((value) {
+    _database.countAllowedApps().then((value) {
       if (value != null) {
         setState(() {
           _allowedAppCount = value;
@@ -81,7 +81,7 @@ class _SettingsPageState extends State<SettingsPage> {
     setState(() {
       _clearingData = true;
     });
-    final clearDatabase = await database.clearDatabase();
+    final clearDatabase = await _database.clearDatabase();
     if (!mounted) return;
     if (!clearDatabase) {
       showSnackBar(
@@ -159,7 +159,7 @@ class _SettingsPageState extends State<SettingsPage> {
       );
       return;
     }
-    database.updateLastCheck(UpdateChecks.lastUpdate);
+    _database.updateLastCheck(UpdateChecks.lastUpdate);
     if (result) {
       showSnackBar(context, t.description.appIsUpToDate);
     } else {
@@ -176,7 +176,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
   void tryUpdateAllowedAppList() async {
     setState(() => _checkingAllowedAppListUpdate = true);
-    final result = await updateAllowedAppList(database);
+    final result = await updateAllowedAppList(_database);
     setState(() {
       _checkingAllowedAppListUpdate = false;
       _updateLastChecked = DateTime.now().toIso8601String();
@@ -405,7 +405,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       const SizedBox(height: AppSpacing.gutter),
                       Row(
                         children: [
-                          AllowedAppList(),
+                          AllowedAppList(database: _database),
                           const SizedBox(width: AppSpacing.gutter),
                           Expanded(
                             child: LoadingButton(
